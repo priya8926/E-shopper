@@ -10,7 +10,6 @@ const sendEmail = async (options) => {
             pass: process.env.PASSWORD
         }
     })
-    debug: true
   const mailOptions = {
         from: process.env.EMAIL_ADDRESS,
         to: options.email,
