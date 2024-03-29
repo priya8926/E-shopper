@@ -68,7 +68,7 @@ userScehema.methods.comparePassword = async function (enterdpassword) {
 userScehema.methods.getResetPassToken = async function () {
     
     //generating token
-    const resetToken = crypto.randomBytes(20).toString("hex")
+    let resetToken = crypto.randomBytes(20).toString("hex")
 
     //hashing and adding reserpassword to userschema
     this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex")
