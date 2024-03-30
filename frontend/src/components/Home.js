@@ -7,11 +7,12 @@ import cat5 from '../img/cat-5.jpg'
 import cat6 from '../img/cat-6.jpg'
 import offer1 from '../img/offer-1.png'
 import offer2 from '../img/offer-2.png'
+import Carousel from './Layout/Carousel'
 
-function Header() {
+function Home() {
     return (
         <>
-            {/* Featured Start */}
+            <Carousel/>
             <div className="container-fluid pt-5">
                 <div className="row px-xl-5 pb-3">
                     <div className="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -56,7 +57,7 @@ function Header() {
 
             {/* Categories Start */}
             <div className="container-fluid pt-5">
-                <div className="row px-xl-5 pb-3">
+                <div className="row px-xl-5 ">
                     <div className="col-lg-4 col-md-6 pb-1">
                         <div
                             className="cat-item d-flex flex-column border mb-4"
@@ -171,4 +172,4 @@ function Header() {
     )
 }
 
-export default Header
+export default Home
