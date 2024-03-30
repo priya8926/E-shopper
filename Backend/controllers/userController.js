@@ -63,13 +63,15 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     }
     // get reset password token
 
-    const resetToken = user.getResetPassToken()
+    const resetTokenPromise = user.getResetPassToken()
+    const resetToken = await resetTokenPromise;
+    
     await user.save({ validateBeforeSave: false });
 
     //send it to user's email
     const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`
 
-    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} /n/nIf you have not requested this email then ignore it `
+    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then ignore it `
 
     try {
         await sendEmail({
@@ -78,7 +80,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
             subject: "Shopping app reset password",
             message,
         })
-        res.status(200).json({ success: true, message: `Email sent to ${user.email} successfully` })
+        res.status(200).json({ success: true, message: `Email sent to ${user.email} successfully` , resetPasswordUrl})
     } catch (error) {
         user.resetPasswordToken = undefined
         user.resetPasswordExpire = undefined

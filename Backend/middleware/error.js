@@ -9,9 +9,9 @@ module.exports = (err, req, res, next) => {
     const message = `Resource not found. Invalid : ${err.path}`
     err = new ErrorHandler(message , 400)
   }
-  if(err.name === "jsonwebtokenError"){
+  if(err.name === "JsonWebTokenError"){
     const message = `json web token is invalid , try again`
-    err = new ErrorHandler(message , 400)
+    return res.status(400).json({ success: false, error: message });
   }
   if(err.name === "TokenExpiredError"){
     const message = `json web token is Expired , try again`

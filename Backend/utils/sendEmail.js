@@ -6,12 +6,12 @@ const sendEmail = async (options) => {
         port : process.env.SMPT_PORT,
         service: process.env.SERVICE,
         auth: {
-            user: process.env.EMAIL_ADDRESS,
-            pass: process.env.PASSWORD
+            user: "priyapatel.892002@gmail.com",
+            pass: "rtkv ponx ysvt ivht"
         }
     })
   const mailOptions = {
-        from: process.env.EMAIL_ADDRESS,
+        from: "priyapatel.892002@gmail.com",
         to: options.email,
         subject: options.subject,
         text: options.message
