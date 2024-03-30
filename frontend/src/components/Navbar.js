@@ -137,7 +137,7 @@ function Navbar() {
                                 id="navbarCollapse"
                             >
                                 <div className="navbar-nav mr-auto py-0">
-                                    <a href="index.html" className="nav-item nav-link active">
+                                    <a href="/" className="nav-item nav-link active">
                                         Home
                                     </a>
                                     <a href="shop.html" className="nav-item nav-link">
