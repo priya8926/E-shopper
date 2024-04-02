@@ -1,51 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import ReactStars from "react-rating-stars-component"
+import React, { useEffect } from 'react'
 import Loading from './Layout/Loader/Loading';
 import { useAlert } from 'react-alert';
 import { getProduct } from '../actions/productActions'
 import { useSelector, useDispatch } from "react-redux"
+import Allproducts from './Allproducts';
 
 function Shop() {
   const dispatch = useDispatch()
   const { loading, error, products } = useSelector((state) => state.products);
-  
-  useEffect(() => {
-    dispatch(getProduct())
-  }, [dispatch])
-  const getRatingOptions = (rating) => {
-    return {
-      edit: false,
-      color: "grey",
-      activeColor: "#ffc107 ",
-      value: rating,
-      isHalf: true
-    };
-  };
   const alert = useAlert()
-  const [product, setProduct] = useState([])
-  // const [loading, setLoading] = useState(true)
 
-  // const getAllProduct = async () => {
-  //   try {
-  //     setLoading(true)
-  //     const response = await fetch("http://localhost:4000/api/v1/products", {
-  //       method: "GET",
-
-  //     })
-  //     if (response.ok) {
-  //       const data = await response.json()
-  //       setProduct(data.products)
-  //     }
-  //     setLoading(false)
-  //   } catch (error) {
-  //     alert("aelrt error")
-  //     console.log(error)
-  //   }
-  // }
   useEffect(() => {
+    if (error) {
+      alert.error(error)
+    }
+    dispatch(getProduct())
+  }, [dispatch, error])
 
-    // getAllProduct()
-  }, [])
+
   return (
     <>
       {loading ? <Loading /> : (
@@ -326,36 +298,8 @@ function Shop() {
                     </div>
                   </div>
                 </div>
-
-                {product && product.map((data) => (
-                  <div className="col-lg-3 col-md-3 col-sm-4 pb-1">
-                    <div className="card product-item border-0 mb-4">
-                      <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img className="img-fluid w-100" src={data.images[0].url} alt="" />
-                      </div>
-                      <div className="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 className="text-truncate mb-3">{data.name}</h6>
-
-                        <div className="d-flex justify-content-center">
-                          <h6>{`₹${data.price}`}</h6>
-
-                        </div>
-                      </div>
-                      <div className="card-footer d-flex justify-content-between bg-light border">
-                        <a href="" className="btn btn-sm text-dark p-0">
-                          <i className="fas fa-eye text-primary mr-1" />
-                          View Detail
-                        </a>
-                        <a href="" className="btn btn-sm text-dark p-0">
-                          <i className="fas fa-shopping-cart text-primary mr-1" />
-                          Add To Cart
-                        </a>
-                      </div>
-                      <div className='card-footer d-flex justify-content-between bg-light border'>
-                        <ReactStars {...getRatingOptions(data.ratings)} /><span>{data.numOfReviews}</span>
-                      </div>
-                    </div>
-                  </div>
+                {products && products.map((data) => (
+                  <Allproducts key={data._id} data={data} />
                 ))}
 
                 <div className="col-12 pb-1">
