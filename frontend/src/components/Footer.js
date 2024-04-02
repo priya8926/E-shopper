@@ -1,10 +1,10 @@
 import React from 'react'
-
+import payment from "../img/payments.png"
 function Footer() {
     return (
         <>
             {/* Footer Start */}
-            <div className="container-fluid bg-secondary text-dark mt-5 pt-5">
+            <div className="container-fluid bg-secondary text-dark mt-5 pt-5 ">
                 <div className="row px-xl-5 pt-5">
                     <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                         <a href="" className="text-decoration-none">
@@ -135,7 +135,7 @@ function Footer() {
                         </p>
                     </div>
                     <div className="col-md-6 px-xl-0 text-center text-md-right">
-                        <img className="img-fluid" src="img/payments.png" alt="" />
+                        <img className="img-fluid" src={payment} alt="" />
                     </div>
                 </div>
             </div>
