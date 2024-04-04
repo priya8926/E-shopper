@@ -1,25 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import './Shop.css'
 import Loading from '../Layout/Loader/Loading';
 import { useAlert } from 'react-alert';
 import { getProduct } from '../../actions/productActions'
 import { useSelector, useDispatch } from "react-redux"
 import Allproducts from './Allproducts';
 import { useParams } from 'react-router-dom';
+import Pagination from 'react-js-pagination';
 
-function Shop() {
+function Shop({ match }) {
+  const { keyword } = useParams();
   const dispatch = useDispatch()
-  const { loading, error, products } = useSelector((state) => state.products);
+  const [currentPage, setCurrentPage] = useState(1)
+  const { loading, error, products, productsCount, resultPerPage } = useSelector((state) => state.products);
   const alert = useAlert()
-  const {keyword} =useParams
+
+  const setCurrentPageNo = (e) => {
+    setCurrentPage(e)
+  }
 
   useEffect(() => {
     if (error) {
       alert.error(error)
       dispatch(clearErrors());
     }
-    dispatch(getProduct(keyword))
-  }, [dispatch, error,alert])
-
+    dispatch(getProduct(keyword, currentPage))
+  }, [dispatch, error, alert, keyword, currentPage])
 
   return (
     <>
@@ -265,37 +271,28 @@ function Shop() {
                   <Allproducts key={data._id} data={data} />
                 ))}
 
+                {/* Pagination */}
                 <div className="col-12 pb-1">
                   <nav aria-label="Page navigation">
-                    <ul className="pagination justify-content-center mb-3">
-                      <li className="page-item disabled">
-                        <a className="page-link" href="#" aria-label="Previous">
-                          <span aria-hidden="true">«</span>
-                          <span className="sr-only">Previous</span>
-                        </a>
-                      </li>
-                      <li className="page-item active">
-                        <a className="page-link" href="#">
-                          1
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a className="page-link" href="#">
-                          2
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a className="page-link" href="#">
-                          3
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a className="page-link" href="#" aria-label="Next">
-                          <span aria-hidden="true">»</span>
-                          <span className="sr-only">Next</span>
-                        </a>
-                      </li>
-                    </ul>
+                    <div className="paginationBox">
+                      {resultPerPage < productsCount && (
+                        <Pagination
+                          activePage={currentPage}
+                          itemsCountPerPage={resultPerPage}
+                          totalItemsCount={productsCount}
+                          onChange={setCurrentPageNo}
+                          nextPageText=">>"
+                          prevPageText="<<"
+                          firstPageText="1st"
+                          lastPageText="Last"
+                          itemClass='page-item'
+                          linkClass='page-link'
+                          activeClass='pageItemActive'
+                          activeLinkClass='pageLinkActive'
+                        />
+                      )}
+
+                    </div>
                   </nav>
                 </div>
               </div>
