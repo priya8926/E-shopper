@@ -1,7 +1,20 @@
-import React from 'react'   
+import React, { useState } from 'react'
 import Category from './Layout/Category'
+import { useNavigate } from 'react-router-dom'
 
 function Navbar() {
+    const [keyword, setKeyword] = useState("")
+
+    const navigate = useNavigate()
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (keyword.trim()) {
+            navigate(`/products/${keyword}`)
+        }
+        else {
+            navigate(`/`)
+        }
+    }
     return (
         <>
             <div className="row align-items-center py-3 px-xl-5">
@@ -16,17 +29,42 @@ function Navbar() {
                     </a>
                 </div>
                 <div className="col-lg-6 col-6 text-left">
-                    <form action="">
+                    <form onSubmit={handleSubmit}>
                         <div className="input-group">
                             <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Search for products"
+                                onChange={(e) => setKeyword(e.target.value)}
                             />
                             <div className="input-group-append">
-                                <span className="input-group-text bg-transparent text-primary">
-                                    <i className="fa fa-search" />
-                                </span>
+                                <input type="submit" value="search" className="input-group-text bg-transparent text-primary"/>
+                            </div>
+                            <div className="dropdown ml-4">
+                                <button
+                                    className="btn border dropdown-toggle"
+                                    type="button"
+                                    id="triggerId"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    Sort by
+                                </button>
+                                <div
+                                    className="dropdown-menu dropdown-menu-right"
+                                    aria-labelledby="triggerId"
+                                >
+                                    <a className="dropdown-item" href="#">
+                                        Latest
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        Popularity
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        Best Rating
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -49,7 +87,7 @@ function Navbar() {
             {/* Navbar Start */}
             <div className="container-fluid mb-2">
                 <div className="row border-top px-xl-5">
-                    <Category/>
+                    <Category />
                     <div className="col-lg-9" >
                         <nav className="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                             <a href="" className="text-decoration-none d-block d-lg-none">
@@ -76,8 +114,8 @@ function Navbar() {
                                     <a href="/" className="nav-item nav-link active">
                                         Home
                                     </a>
-                                    <a href="/shop" className="nav-item nav-link">
-                                        Shop
+                                    <a href="/Products" className="nav-item nav-link">
+                                        Products
                                     </a>
                                     <a href="detail.html" className="nav-item nav-link">
                                         Shop Detail

@@ -1,13 +1,13 @@
 import React from 'react'
-import cat1 from '../img/cat-1.jpg'
-import cat2 from '../img/cat-2.jpg'
-import cat3 from '../img/cat-3.jpg'
-import cat4 from '../img/cat-4.jpg'
-import cat5 from '../img/cat-5.jpg'
-import cat6 from '../img/cat-6.jpg'
-import offer1 from '../img/offer-1.png'
-import offer2 from '../img/offer-2.png'
-import Carousel from './Layout/Carousel'
+import cat1 from '../../img/cat-1.jpg';
+import cat2 from '../../img/cat-2.jpg'
+import cat3 from '../../img/cat-3.jpg'
+import cat4 from '../../img/cat-4.jpg'
+import cat5 from '../../img/cat-5.jpg'
+import cat6 from '../../img/cat-6.jpg'
+import offer1 from '../../img/offer-1.png'
+import offer2 from '../../img/offer-2.png'
+import Carousel from '../Layout/Carousel'
 
 function Home() {
     return (

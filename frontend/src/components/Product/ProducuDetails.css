@@ -1,0 +1,124 @@
+.ProductDetails img {
+    max-width: 20vw;
+}
+
+.ProductDetails {
+    display: flex;
+    justify-content: center;
+}
+
+/* .ProductDetails .imgDiv{
+    border: 1px solid grey;
+    border-radius: 9px
+} */
+.block1>p {
+    font-size: 12px;
+}
+
+.block1 {
+    border-bottom: 1px solid grey;
+}
+
+.block2 {
+    display: flex;
+    padding: 19px 0;
+    border-bottom: 1px solid grey;
+}
+
+.block3 {
+    padding: 20px 0;
+}
+
+.block3 {
+    font: 400 "Franklin Gothic Medium";
+    margin: 10px 0;
+    border-bottom: 1px solid grey;
+}
+
+.block3 .block3-1 {
+    display: flex;
+    align-items: center;
+    margin: 22px 0;
+}
+
+.block3-1-1 input {
+    width: 40px;
+    text-align: center;
+}
+
+.block3-1 .card {
+    background-color: #D19C97;
+    margin-left: 33px;
+    border-radius: 9px;
+}
+
+.block3-1 .card:hover {
+    background-color: #eea098;
+}
+
+.block3-1 {
+    border-bottom: 1px solid grey;
+}
+
+.block3-1-1 {
+    margin-bottom: 25px;
+    margin-top: 20px;
+}
+.block3-1-1 button{
+    border-radius: 9px;
+    background-color : #D19C97;
+}
+.block4 p {
+    font-size: 12px;
+}
+
+.submitReview {
+    background-color: #D19C97;
+    border-radius: 9px;
+}
+
+.submitReview:hover {
+    transform: scale(1.1);
+}
+
+.redColor {
+    color: red;
+}
+
+.greenColor {
+    color: green;
+}
+
+.reviewHeading {
+    color: black;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    padding: 1vmax;
+    width: 20vmax;
+    margin: auto;
+    margin-bottom: 4vmax;
+    margin-top: 4vmax;
+}
+
+.reviews .reviewCart img {
+    height: 40px;
+}   
+.reviewCart {
+    flex: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
+    border: 1px solid rgba(56, 56, 56, 0.116);
+    width: 20vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1vmax;
+    padding: 3vmax;
+}
+.noReview{
+    text-align: center;
+    padding: 1vmax;
+    width: 20vmax;
+    margin: auto;
+    margin-bottom: 4vmax;
+    margin-top: 4vmax;
+}

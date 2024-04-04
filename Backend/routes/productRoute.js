@@ -12,7 +12,7 @@ router.route("/admin/products/new").post(isAuthenticateUser, authorizeRoles("adm
 router.route("/admin/updateproduct/:id").patch(isAuthenticateUser , authorizeRoles("admin"), controllers.updateProduct)
 
 // get  one product by id
-router.route("/getproduct/:id").get(isAuthenticateUser, controllers.getProductDetails)
+router.route("/getproduct/:id").get( controllers.getProductDetails)
 
 //delete product
 router.route("/admin/deleteproduct/:id").delete(isAuthenticateUser , authorizeRoles("admin"), controllers.deleteProduct)

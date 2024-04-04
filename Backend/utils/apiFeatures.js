@@ -11,7 +11,6 @@ class ApiFeatures {
                     $options : "i"
                 }
             } : {}
-            console.log(keyword)
             this.query = this.query.find({...keyword})
             return this;
     }
@@ -23,12 +22,11 @@ class ApiFeatures {
         removeFields.forEach((key) => delete queryCopy[key])
 
         //filter for price and rating
-        console.log(queryCopy)
+        // console.log(queryCopy)
         let querystr = JSON.stringify(queryCopy ,"querycopy")
         querystr = querystr.replace(/\b(gt|gte|lt|lte)\b/g , key =>`$${key}`)
 
         this.query = this.query.find(JSON.parse(querystr))
-        console.log(querystr , "querystr")
         return this;
     }
     pagination(resultPerPage){
