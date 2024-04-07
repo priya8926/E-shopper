@@ -11,6 +11,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
     res.status(201).json({ success: true, product })
 
 })
+
 //get products
 exports.getAllProduct = async (req, res) => {
     try {

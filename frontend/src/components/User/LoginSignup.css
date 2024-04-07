@@ -194,7 +194,7 @@
     }
   
     .loginForm > a {
-      font-size: 12px;
+      font-size: 13px;
     }
   
     #registerImage > img {
@@ -204,7 +204,8 @@
   
     #registerImage > input::file-selector-button {
       height: 7vh;
-      font: 400 1.8vmax;
+      /* font: 400 1.8vmax; */
+      font-size: 12px;
     }
   
     .loginBtn,

@@ -38,7 +38,7 @@ export const login = (email, password) => async (dispatch) => {
             payload: error.response.data.message
         })
     }
-}
+} 
 // register
 export const register = (userData) => async (dispatch) => {
     try {

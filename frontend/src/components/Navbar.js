@@ -142,14 +142,14 @@ function Navbar() {
                                         Contact
                                    </Link>
                                 </div>
-                                <div className="navbar-nav ml-auto py-0">
+                                {/* <div className="navbar-nav ml-auto py-0">
                                    <Link to="/login" className="nav-item nav-link">
                                         Login
                                    </Link>
                                    <Link to="/register" className="nav-item nav-link">
                                         Register
                                    </Link>
-                                </div>
+                                </div> */}
                             </div>
                         </nav>
                     </div>

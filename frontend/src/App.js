@@ -9,11 +9,15 @@ import ProductDetails from './components/Product/ProductDetails';
 import LoginSignup from './components/User/LoginSignup';
 import store from './store'
 import { loadUser } from './actions/userActions';
+import { useEffect } from 'react';
 
 function App() {
   const location = useLocation();
-  store.dispatch(loadUser())
-
+  useEffect(() => {
+    store.dispatch(loadUser())
+    const user = loadUser()
+    console.log(user.user , " user")
+  })
   return (
     <>
       <Navbar />
