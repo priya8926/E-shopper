@@ -8,6 +8,7 @@ import ReactStars from "react-rating-stars-component"
 import ReviewCart from './ReviewCart'
 import Loading from '../Layout/Loader/Loading'
 import { useAlert } from "react-alert"
+import Metadata from '../Layout/Metadata'
 
 function ProductDetails() {
     const dispatch = useDispatch()
@@ -34,7 +35,9 @@ function ProductDetails() {
 
     return (
         <>
-            {loading ? <Loading /> : (<>
+            {loading ? <Loading /> : (
+                <>
+                <Metadata title={`${product.name} -- EShopper`}/>
                 <div className="row justify-content-center  productDetails mt-5 ProductDetails">
                     <div className="col-4 align-items-center  imgDiv">
                         <Carousel>

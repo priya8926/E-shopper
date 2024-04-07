@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import {positions , transitions , Provider as AlertProvider} from "react-alert"
-import AlertTemplate from "react-alert-template-basic"
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
 import { Provider } from "react-redux"
 import store from './store';
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Category from './Layout/Category'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import LoginSignup from './User/LoginSignup'
 
 function Navbar() {
     const [keyword, setKeyword] = useState("")
@@ -19,14 +20,14 @@ function Navbar() {
         <>
             <div className="row align-items-center py-3 px-xl-5">
                 <div className="col-lg-3 d-none d-lg-block">
-                    <a href="" className="text-decoration-none">
+                   <Link to="" className="text-decoration-none">
                         <h1 className="m-0 display-5 font-weight-semi-bold">
                             <span className="text-primary font-weight-bold border px-3 mr-1">
                                 E
                             </span>
                             Shopper
                         </h1>
-                    </a>
+                   </Link>
                 </div>
                 <div className="col-lg-6 col-6 text-left">
                     <form onSubmit={handleSubmit}>
@@ -55,32 +56,32 @@ function Navbar() {
                                     className="dropdown-menu dropdown-menu-right"
                                     aria-labelledby="triggerId"
                                 >
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="#">
                                         Latest
-                                    </a>
-                                    <a className="dropdown-item" href="#">
+                                    </Link>
+                                   <Link className="dropdown-item" to="#">
                                         Popularity
-                                    </a>
-                                    <a className="dropdown-item" href="#">
+                                   </Link>
+                                   <Link className="dropdown-item" to="#">
                                         Best Rating
-                                    </a>
+                                   </Link>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div className="col-lg-3 col-6 text-right">
-                    <a href="" className="btn border">
+                   <Link to="" className="btn border">
                         <i className="fas fa-heart text-primary" />
                         <span className="badge">0</span>
-                    </a>
-                    <a href="" className="btn border">
+                   </Link>
+                   <Link to="" className="btn border">
                         <i className="fas fa-shopping-cart text-primary" />
                         <span className="badge">0</span>
-                    </a>
-                    <a href="" className="btn border">
+                   </Link>
+                   <Link to="/login" className="btn border">
                         <i className="fas fa-user text-primary"></i>
-                    </a>
+                   </Link>
                 </div>
             </div>
 
@@ -90,14 +91,14 @@ function Navbar() {
                     <Category />
                     <div className="col-lg-9" >
                         <nav className="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                            <a href="" className="text-decoration-none d-block d-lg-none">
+                           <Link to="/" className="text-decoration-none d-block d-lg-none">
                                 <h1 className="m-0 display-5 font-weight-semi-bold">
                                     <span className="text-primary font-weight-bold border px-3 mr-1">
                                         E
                                     </span>
                                     Shopper
                                 </h1>
-                            </a>
+                           </Link>
                             <button
                                 type="button"
                                 className="navbar-toggler"
@@ -107,47 +108,47 @@ function Navbar() {
                                 <span className="navbar-toggler-icon" />
                             </button>
                             <div
-                                className="collapse navbar-collapse justify-content-between"
+                                className="collapse navbar-collapse justify-content-between "
                                 id="navbarCollapse"
                             >
                                 <div className="navbar-nav mr-auto py-0">
-                                    <a href="/" className="nav-item nav-link active">
+                                   <Link to="/" className="nav-item nav-link active">
                                         Home
-                                    </a>
-                                    <a href="/Products" className="nav-item nav-link">
+                                   </Link>
+                                   <Link to="/Products" className="nav-item nav-link">
                                         Products
-                                    </a>
-                                    <a href="detail.html" className="nav-item nav-link">
+                                   </Link>
+                                   <Link to="/shopdetail" className="nav-item nav-link">
                                         Shop Detail
-                                    </a>
+                                   </Link>
                                     <div className="nav-item dropdown">
-                                        <a
-                                            href="#"
+                                       <Link
+                                            to="/pages"
                                             className="nav-link dropdown-toggle"
                                             data-toggle="dropdown"
                                         >
                                             Pages
-                                        </a>
+                                       </Link>
                                         <div className="dropdown-menu rounded-0 m-0">
-                                            <a href="cart.html" className="dropdown-item">
+                                           <Link to="/shoppingcart" className="dropdown-item">
                                                 Shopping Cart
-                                            </a>
-                                            <a href="checkout.html" className="dropdown-item">
+                                           </Link>
+                                           <Link to="/checkout" className="dropdown-item">
                                                 Checkout
-                                            </a>
+                                           </Link>
                                         </div>
                                     </div>
-                                    <a href="contact.html" className="nav-item nav-link">
+                                   <Link to="/contact" className="nav-item nav-link">
                                         Contact
-                                    </a>
+                                   </Link>
                                 </div>
                                 <div className="navbar-nav ml-auto py-0">
-                                    <a href="" className="nav-item nav-link">
+                                   <Link to="/login" className="nav-item nav-link">
                                         Login
-                                    </a>
-                                    <a href="" className="nav-item nav-link">
+                                   </Link>
+                                   <Link to="/register" className="nav-item nav-link">
                                         Register
-                                    </a>
+                                   </Link>
                                 </div>
                             </div>
                         </nav>

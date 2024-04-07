@@ -4,17 +4,22 @@ const User = require("../models/UserModel")
 const setToken = require("../utils/jwtToken")
 const sendEmail = require("../utils/sendEmail")
 const crypto = require("crypto")
-const Product = require("../models/ProductModel")
+const cloudinary = require("cloudinary")
 
 //register user
 exports.registerUser = catchAsyncError(async (req, res) => {
     const { name, email, password } = req.body
 
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar ,{
+        folder: "avatar",
+        width : 150,
+        crop : "scale"
+    })
     const user = await User.create({
         name, email, password,
         avatar: {
-            public_id: "this is public_id of user",
-            url: "avtarurl"
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
         }
     })
     setToken(user, 201, res)

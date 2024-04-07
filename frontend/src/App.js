@@ -1,22 +1,30 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar';
 import Shop from './components/Shop/Shop';
 import ProductDetails from './components/Product/ProductDetails';
+import LoginSignup from './components/User/LoginSignup';
+import store from './store'
+import { loadUser } from './actions/userActions';
 
 function App() {
+  const location = useLocation();
+  store.dispatch(loadUser())
+
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path="/"  element={<Home />}/>
-        <Route path= "/Products" element = {<Shop/>}/>
-        <Route path= "/Products/:keyword" element = {<Shop/>}/>
-        <Route path= "/product/:id" element = {<ProductDetails/>}/>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/Products" element={<Shop />} />
+        <Route exact path="/Products/:keyword" element={<Shop />} />
+        <Route exact path="/product/:id" element={<ProductDetails />} />
+        <Route exact path="/login" element={<LoginSignup />} />
       </Routes>
-      <Footer/>
+      {location.pathname.startsWith("/login") ? null : <Footer />}
     </>
   );
 }

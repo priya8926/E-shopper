@@ -8,10 +8,12 @@ import cat6 from '../../img/cat-6.jpg'
 import offer1 from '../../img/offer-1.png'
 import offer2 from '../../img/offer-2.png'
 import Carousel from '../Layout/Carousel'
+import Metadata from '../Layout/Metadata';
 
 function Home() {
     return (
         <>
+        <Metadata title="Home -- EShopper"/>
             <Carousel/>
             <div className="container-fluid pt-5">
                 <div className="row px-xl-5 pb-3">

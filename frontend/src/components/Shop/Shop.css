@@ -46,3 +46,7 @@
 .pageItemActive {
     background-color: #D19C97;
 }
+.categories:hover{
+    cursor: pointer;
+    color :#D19C97;
+}
