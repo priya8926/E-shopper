@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './UserOptions.css'
 import { useNavigate, Link } from 'react-router-dom';
-import { SpeedDial, SpeedDialAction } from "@mui/material";
 import DashboardIcon from '@mui/icons-material/esm/Dashboard';
 import PersonIcon from '@mui/icons-material/esm/Person';
 import ExitToAppIcon from '@mui/icons-material/esm/ExitToApp';
@@ -11,28 +10,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { useAlert } from 'react-alert';
 
 function UserOption({ user }) {
-    const [open, setOpen] = useState(false)
-    let navigate = useNavigate()
     const dispatch = useDispatch()
     const alert = useAlert()
 
-    // const options = [
-    //     { icon: <ListAltIcon />, name: "Orders", func: orders },
-    //     { icon: <PersonIcon />, name: "Profile", func: account },
-    //     { icon: <ExitToAppIcon />, name: "Logout", func: handleLogout },
-    // ]
-    // if (user.role === "admin") {
-    //     options.unshift({ icon: <DashboardIcon />, name: "Dashboard", func: dashboard })
-    // }
-    // function dashboard() {
-    //     navigate("/dashboard")
-    // }
-    // function orders() {
-    //     navigate("/orders")
-    // }
-    // function account() {
-    //     navigate("/accout")
-    // }
     const handleLogout = () => {
         dispatch(logoutUser())
         alert.success("Logout Succesfully")
@@ -41,7 +21,7 @@ function UserOption({ user }) {
         <>
             <div className="dropdown">
                 <button
-                    className="btn border dropdown-toggle"
+                    className="btn dropdown-toggle"
                     type="button"
                     id="triggerId"
                     data-toggle="dropdown"
@@ -54,56 +34,34 @@ function UserOption({ user }) {
                         alt='profile'
                     />
                 </button>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu border-0" style={{ textAlign: "start" }}>
                     {
                         user.role === "admin" &&
-
                         <li>
-                            <Link className="dropdown-item" to="/dashboard">
-                                <DashboardIcon />
+                            <Link className="dropdown-item" to="/dashboard" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Dashboard">
+                                <DashboardIcon /> Dashboard
                             </Link>
                         </li>
                     }
                     <li>
-                        <Link className="dropdown-item" to="/orders">
-                            <ListAltIcon />
+                        <Link className="dropdown-item" to="/orders" data-bs-toggle="tooltip"
+                            data-bs-placement="left"
+                            data-bs-title="Orders">
+                            <ListAltIcon /> Orders
                         </Link>
                     </li>
                     <li>
                         <Link className="dropdown-item" to="/account">
-                            <PersonIcon />
+                            <PersonIcon /> Profile
                         </Link>
                     </li>
                     <li>
                         <Link className="dropdown-item" to="" onClick={handleLogout}>
-                            <ExitToAppIcon />
+                            <ExitToAppIcon /> Logout
                         </Link>
                     </li>
                 </ul>
             </div>
-
-            {/* <SpeedDial
-                ariaLabel='SpeedDial tooltip example'
-                onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
-                open={open}
-                direction='down'
-                icon={
-                    <img
-                        className='speedDialIcon'
-                        src={user.avatar && user.avatar.url ? user.avatar.url : "https://w7.pngwing.com/pngs/717/24/png-transparent-computer-icons-user-profile-user-account-avatar-heroes-silhouette-black-thumbnail.png"}
-                        alt='profile'
-                    />
-                }
-                onClick={() => setOpen((prevOpen) => !prevOpen)}
-            >
-
-                {
-                    options.map((item) => (
-                        <SpeedDialAction key={item.name} icon={item.icon} tooltipTitle={item.name} onClick={item.func} />
-                    ))
-                }
-            </SpeedDial> */}
         </>
     )
 }
