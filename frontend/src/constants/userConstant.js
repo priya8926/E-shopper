@@ -10,4 +10,7 @@ export const Load_user_REQUEST = "Load_User_REQUEST";
 export const Load_User_SUCCESS = "Load_User_SUCCESS";
 export const Load_User_FAILURE = "Load_User_FAILURE";
 
+export const Logout_user_SUCCESS = "Logout_user_SUCCESS";
+export const Logout_user_FAILURE = "Logout_user_FAILURE";
+
 export const CLEAR_ERRORS = "CLEAR_ERRORS"

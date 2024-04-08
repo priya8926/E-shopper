@@ -10,17 +10,21 @@ import LoginSignup from './components/User/LoginSignup';
 import store from './store'
 import { loadUser } from './actions/userActions';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
   const location = useLocation();
-  useEffect(() => {
-    store.dispatch(loadUser())
-    const user = loadUser()
-    console.log(user.user , " user")
-  })
+  const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector(state => state.user);
+
+    useEffect(() => {
+      dispatch(loadUser());
+    }, [dispatch]);
+
   return (
     <>
       <Navbar />
+     
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/Products" element={<Shop />} />

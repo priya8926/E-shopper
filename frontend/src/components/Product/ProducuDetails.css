@@ -73,12 +73,14 @@
 }
 
 .submitReview {
-    background-color: #D19C97;
-    border-radius: 9px;
+    /* background-color: #D19C97; */
+    border: none;
+    background: transparent;
 }
 
 .submitReview:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
+    color : white
 }
 
 .redColor {

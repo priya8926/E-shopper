@@ -1,33 +1,38 @@
 import React, { useState } from 'react'
+import '../components/Layout/UserOptions.css'
 import Category from './Layout/Category'
 import { useNavigate, Link } from 'react-router-dom'
 import LoginSignup from './User/LoginSignup'
+import UserOption from '../components/Layout/UserOption';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Navbar() {
     const [keyword, setKeyword] = useState("")
 
     const navigate = useNavigate()
+    const { user, isAuthenticated } = useSelector(state => state.user);
     const handleSubmit = (e) => {
         e.preventDefault()
+
         if (keyword.trim()) {
             navigate(`/products/${keyword}`)
         }
         else {
-            navigate(`/`)
+            navigate(`/Products`)
         }
     }
     return (
         <>
-            <div className="row align-items-center py-3 px-xl-5">
+            <div className="row align-items-center py-3 px-xl-5 navbar">
                 <div className="col-lg-3 d-none d-lg-block">
-                   <Link to="" className="text-decoration-none">
+                    <Link to="" className="text-decoration-none">
                         <h1 className="m-0 display-5 font-weight-semi-bold">
                             <span className="text-primary font-weight-bold border px-3 mr-1">
                                 E
                             </span>
                             Shopper
                         </h1>
-                   </Link>
+                    </Link>
                 </div>
                 <div className="col-lg-6 col-6 text-left">
                     <form onSubmit={handleSubmit}>
@@ -39,7 +44,7 @@ function Navbar() {
                                 onChange={(e) => setKeyword(e.target.value)}
                             />
                             <div className="input-group-append">
-                                <input type="submit" value="search" className="input-group-text bg-transparent text-primary"/>
+                                <input type="submit" value="search" className="input-group-text bg-transparent text-primary" />
                             </div>
                             <div className="dropdown ml-4">
                                 <button
@@ -59,46 +64,50 @@ function Navbar() {
                                     <Link className="dropdown-item" to="#">
                                         Latest
                                     </Link>
-                                   <Link className="dropdown-item" to="#">
+                                    <Link className="dropdown-item" to="#">
                                         Popularity
-                                   </Link>
-                                   <Link className="dropdown-item" to="#">
+                                    </Link>
+                                    <Link className="dropdown-item" to="#">
                                         Best Rating
-                                   </Link>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div className="col-lg-3 col-6 text-right">
-                   <Link to="" className="btn border">
+                    <Link to="" className="btn border">
                         <i className="fas fa-heart text-primary" />
                         <span className="badge">0</span>
-                   </Link>
-                   <Link to="" className="btn border">
+                    </Link>
+                    <Link to="" className="btn border">
                         <i className="fas fa-shopping-cart text-primary" />
                         <span className="badge">0</span>
-                   </Link>
-                   <Link to="/login" className="btn border">
-                        <i className="fas fa-user text-primary"></i>
-                   </Link>
+                    </Link>
+                    <Link to="" className="btn useroption">
+                        {isAuthenticated ? <UserOption user={user} /> : (
+                            <Link to="/login" className="btn border mx-4" style={{ borderRadius: "50%" }}>
+                                <i className="fas fa-user text-primary" ></i>
+                            </Link>
+                        )}
+                    </Link>
                 </div>
             </div>
 
             {/* Navbar Start */}
-            <div className="container-fluid mb-2">
+            <div className="container-fluid mb-2" >
                 <div className="row border-top px-xl-5">
                     <Category />
                     <div className="col-lg-9" >
                         <nav className="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                           <Link to="/" className="text-decoration-none d-block d-lg-none">
+                            <Link to="/" className="text-decoration-none d-block d-lg-none">
                                 <h1 className="m-0 display-5 font-weight-semi-bold">
                                     <span className="text-primary font-weight-bold border px-3 mr-1">
                                         E
                                     </span>
                                     Shopper
                                 </h1>
-                           </Link>
+                            </Link>
                             <button
                                 type="button"
                                 className="navbar-toggler"
@@ -112,35 +121,35 @@ function Navbar() {
                                 id="navbarCollapse"
                             >
                                 <div className="navbar-nav mr-auto py-0">
-                                   <Link to="/" className="nav-item nav-link active">
+                                    <Link to="/" className="nav-item nav-link active">
                                         Home
-                                   </Link>
-                                   <Link to="/Products" className="nav-item nav-link">
+                                    </Link>
+                                    <Link to="/Products" className="nav-item nav-link">
                                         Products
-                                   </Link>
-                                   <Link to="/shopdetail" className="nav-item nav-link">
+                                    </Link>
+                                    <Link to="/shopdetail" className="nav-item nav-link">
                                         Shop Detail
-                                   </Link>
+                                    </Link>
                                     <div className="nav-item dropdown">
-                                       <Link
+                                        <Link
                                             to="/pages"
                                             className="nav-link dropdown-toggle"
                                             data-toggle="dropdown"
                                         >
                                             Pages
-                                       </Link>
+                                        </Link>
                                         <div className="dropdown-menu rounded-0 m-0">
-                                           <Link to="/shoppingcart" className="dropdown-item">
+                                            <Link to="/shoppingcart" className="dropdown-item">
                                                 Shopping Cart
-                                           </Link>
-                                           <Link to="/checkout" className="dropdown-item">
+                                            </Link>
+                                            <Link to="/checkout" className="dropdown-item">
                                                 Checkout
-                                           </Link>
+                                            </Link>
                                         </div>
                                     </div>
-                                   <Link to="/contact" className="nav-item nav-link">
+                                    <Link to="/contact" className="nav-item nav-link">
                                         Contact
-                                   </Link>
+                                    </Link>
                                 </div>
                                 {/* <div className="navbar-nav ml-auto py-0">
                                    <Link to="/login" className="nav-item nav-link">

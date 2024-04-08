@@ -18,13 +18,11 @@ store.subscribe(() => console.log(store.getState()))
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
       <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...options}>
         <App />
       </AlertProvider>
       </Provider>
-    </React.StrictMode>
   </BrowserRouter>
 );
 

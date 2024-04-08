@@ -28,7 +28,6 @@ function LoginSignup({history}) {
 
     const { error, loading , isAuthenticated } = useSelector((state) => state.user)
     const { name, email, password } = user
-
     const [avatar, setAvatar] = useState("https://w7.pngwing.com/pngs/717/24/png-transparent-computer-icons-user-profile-user-account-avatar-heroes-silhouette-black-thumbnail.png")
 
     const [avatarPreview, setAvatarPreview] = useState("https://w7.pngwing.com/pngs/717/24/png-transparent-computer-icons-user-profile-user-account-avatar-heroes-silhouette-black-thumbnail.png")
@@ -46,6 +45,7 @@ function LoginSignup({history}) {
         myForm.set("email", email)
         myForm.set("password", password)
         myForm.set("avatar", avatar)
+
        dispatch(register(myForm))
     }
 
