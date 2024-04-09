@@ -11,27 +11,41 @@ import store from './store'
 import { loadUser } from './actions/userActions';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Profile from './components/User/Profile';
+import UpdateProfile from './components/User/UpdateProfile';
+import ProtectedRoute from './components/Route/ProtectedRoute';
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector(state => state.user);
 
-    useEffect(() => {
-      dispatch(loadUser());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
 
   return (
     <>
       <Navbar />
-     
       <Routes>
         <Route exact path="/" element={<Home />} />
+
         <Route exact path="/Products" element={<Shop />} />
+
         <Route exact path="/Products/:keyword" element={<Shop />} />
+
         <Route exact path="/product/:id" element={<ProductDetails />} />
+
+        <Route path="/account" element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } />
+
         <Route exact path="/login" element={<LoginSignup />} />
+
       </Routes>
+
       {location.pathname.startsWith("/login") ? null : <Footer />}
     </>
   );

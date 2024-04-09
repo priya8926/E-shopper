@@ -13,4 +13,9 @@ export const Load_User_FAILURE = "Load_User_FAILURE";
 export const Logout_user_SUCCESS = "Logout_user_SUCCESS";
 export const Logout_user_FAILURE = "Logout_user_FAILURE";
 
+export const Update_Profile_REQUEST = "Update_Profile_REQUEST"
+export const Update_Profile_SUCCESS = "Update_Profile_SUCCESS"
+export const Update_Profile_RESET = "Update_Profile_RESET"
+export const Update_Profile_FAILURE = "Update_Profile_FAILURE"
+
 export const CLEAR_ERRORS = "CLEAR_ERRORS"

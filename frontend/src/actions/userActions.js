@@ -10,6 +10,10 @@ import {
     Load_User_FAILURE,
     Logout_user_SUCCESS,
     Logout_user_FAILURE,
+    Update_Profile_REQUEST,
+    Update_Profile_SUCCESS,
+    Update_Profile_RESET,
+    Update_Profile_FAILURE,
     CLEAR_ERRORS
 } from '../constants/userConstant'
 import axios from "axios"
@@ -93,6 +97,28 @@ export const logoutUser = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: Logout_user_FAILURE,
+            payload: error.response.data.message
+        })
+    }
+}
+// update user profile
+export const upateProfile = (userData) => async (dispatch) => {
+    try {
+        dispatch({
+            type: Update_Profile_REQUEST
+        })
+
+        const config = { headers: { "Content-Type": "multipart/form-data" } };
+
+        const { data } = await axios.post("/api/v1/me/update", userData, config);
+
+        dispatch({
+            type: Update_Profile_SUCCESS,
+            payload: data.user
+        })
+    } catch (error) {
+        dispatch({
+            type: Update_Profile_FAILURE,
             payload: error.response.data.message
         })
     }

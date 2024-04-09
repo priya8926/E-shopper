@@ -84,7 +84,7 @@ function Navbar() {
                         <i className="fas fa-shopping-cart text-primary" />
                         <span className="badge">0</span>
                     </Link>
-                    <Link to="" className="btn useroption">
+                    <Link  className="btn useroption">
                         {isAuthenticated ? <UserOption user={user} /> : (
                             <Link to="/login" className="btn border mx-4" style={{ borderRadius: "50%" }}>
                                 <i className="fas fa-user text-primary" ></i>

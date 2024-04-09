@@ -37,6 +37,10 @@ const userScehema = new mongoose.Schema({
         type: String,
         default: "user"
     },
+    createAt:{
+     type: Date,
+     default: Date.now()
+    },
 
     resetPasswordToken: String,
     resetPasswordExpire: Date
@@ -66,7 +70,7 @@ userScehema.methods.comparePassword = async function (enterdpassword) {
 
 //generating password reset token
 userScehema.methods.getResetPassToken = async function () {
-    
+
     //generating token
     let resetToken = crypto.randomBytes(20).toString("hex")
 

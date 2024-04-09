@@ -38,21 +38,19 @@ function UserOption({ user }) {
                     {
                         user.role === "admin" &&
                         <li>
-                            <Link className="dropdown-item" to="/dashboard" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Dashboard">
+                            <Link className="dropdown-item" to="/dashboard" >
                                 <DashboardIcon /> Dashboard
                             </Link>
                         </li>
                     }
                     <li>
-                        <Link className="dropdown-item" to="/orders" data-bs-toggle="tooltip"
-                            data-bs-placement="left"
-                            data-bs-title="Orders">
-                            <ListAltIcon /> Orders
+                        <Link className="dropdown-item" to="/account">
+                            <PersonIcon /> Profile
                         </Link>
                     </li>
                     <li>
-                        <Link className="dropdown-item" to="/account">
-                            <PersonIcon /> Profile
+                        <Link className="dropdown-item" to="/orders">
+                            <ListAltIcon /> Orders
                         </Link>
                     </li>
                     <li>
