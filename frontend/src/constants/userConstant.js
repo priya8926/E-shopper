@@ -18,4 +18,9 @@ export const Update_Profile_SUCCESS = "Update_Profile_SUCCESS"
 export const Update_Profile_RESET = "Update_Profile_RESET"
 export const Update_Profile_FAILURE = "Update_Profile_FAILURE"
 
+export const Update_Password_REQUEST = "Update_Password_REQUEST"
+export const Update_Password_SUCCESS = "Update_Password_SUCCESS"
+export const Update_Password_RESET = "Update_Password_RESET"
+export const Update_Password_FAILURE = "Update_Profile_FAILURE"
+
 export const CLEAR_ERRORS = "CLEAR_ERRORS"

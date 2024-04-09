@@ -12,8 +12,10 @@ import {
     Logout_user_FAILURE,
     Update_Profile_REQUEST,
     Update_Profile_SUCCESS,
-    Update_Profile_RESET,
     Update_Profile_FAILURE,
+    Update_Password_REQUEST,
+    Update_Password_SUCCESS,
+    Update_Password_FAILURE,
     CLEAR_ERRORS
 } from '../constants/userConstant'
 import axios from "axios"
@@ -110,15 +112,37 @@ export const upateProfile = (userData) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-        const { data } = await axios.post("/api/v1/me/update", userData, config);
+        const { data } = await axios.put("/api/v1/me/update", userData, config);
 
         dispatch({
             type: Update_Profile_SUCCESS,
-            payload: data.user
+            payload: data.success
         })
     } catch (error) {
         dispatch({
             type: Update_Profile_FAILURE,
+            payload: error.response.data.message
+        })
+    }
+}
+// change password
+export const updatePassword = (passwords) => async (dispatch) => {
+    try {
+        dispatch({
+            type: Update_Password_REQUEST
+        })
+
+        const config = { headers: { "Content-Type": "application/json" } };
+
+        const { data } = await axios.put("/api/v1/password/update", passwords, config);
+
+        dispatch({
+            type:Update_Password_SUCCESS,
+            payload: data.success
+        })
+    } catch (error) {
+        dispatch({
+            type: Update_Password_FAILURE,
             payload: error.response.data.message
         })
     }

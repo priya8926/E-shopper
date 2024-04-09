@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Profile from './components/User/Profile';
 import UpdateProfile from './components/User/UpdateProfile';
 import ProtectedRoute from './components/Route/ProtectedRoute';
+import UpdatePassword from './components/User/UpdatePassword';
 
 function App() {
   const location = useLocation();
@@ -42,11 +43,23 @@ function App() {
           </ProtectedRoute>
         } />
 
+        <Route path="/me/update" element={
+          <ProtectedRoute>
+            <UpdateProfile />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/password/update" element={
+          <ProtectedRoute>
+            <UpdatePassword />
+          </ProtectedRoute>
+        } />
+
         <Route exact path="/login" element={<LoginSignup />} />
 
       </Routes>
+      {location.pathname.startsWith("/login") || location.pathname.startsWith("/me/update") ? null : <Footer />}
 
-      {location.pathname.startsWith("/login") ? null : <Footer />}
     </>
   );
 }

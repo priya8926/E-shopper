@@ -10,10 +10,10 @@ const cloudinary = require("cloudinary")
 exports.registerUser = catchAsyncError(async (req, res) => {
     const { name, email, password } = req.body
 
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar ,{
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: "avatar",
-        width : 150,
-        crop : "scale"
+        width: 150,
+        crop: "scale"
     })
     const user = await User.create({
         name, email, password,
@@ -70,7 +70,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
 
     const resetTokenPromise = user.getResetPassToken()
     const resetToken = await resetTokenPromise;
-    
+
     await user.save({ validateBeforeSave: false });
 
     //send it to user's email
@@ -80,12 +80,12 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
 
     try {
         await sendEmail({
-            
+
             email: user.email,
             subject: "Shopping app reset password",
             message,
         })
-        res.status(200).json({ success: true, message: `Email sent to ${user.email} successfully` , resetPasswordUrl})
+        res.status(200).json({ success: true, message: `Email sent to ${user.email} successfully`, resetPasswordUrl })
     } catch (error) {
         user.resetPasswordToken = undefined
         user.resetPasswordExpire = undefined
@@ -149,8 +149,21 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
         name: req.body.name,
         email: req.body.email
     }
-    // avtar remain for later
+    if (req.body.avatar !== "") {
+        const user = await User.findById(req.user.id)
+        const imageId = user.avatar.public_id
 
+        await cloudinary.v2.uploader.destroy(imageId);
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder: "avatar",
+            width: 150,
+            crop: "scale"
+        })
+        newUserData.avatar = {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        }
+    }
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new: true,
         runValidators: true,
