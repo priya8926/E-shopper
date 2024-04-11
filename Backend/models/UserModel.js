@@ -64,8 +64,8 @@ userScehema.methods.jsonwebtoken = function () {
 }
 
 //compare password
-userScehema.methods.comparePassword = async function (enterdpassword) {
-    return await bcrypt.compare(enterdpassword, this.password)
+userScehema.methods.comparePassword = async function (password) {
+    return await bcrypt.compare(password, this.password)
 }
 
 //generating password reset token
@@ -77,7 +77,7 @@ userScehema.methods.getResetPassToken = async function () {
     //hashing and adding reserpassword to userschema
     this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex")
 
-    this.resetPasswordExpire = Date.now() + 15 * 60 * 1000
+    this.resetPasswordExpire = Date.now() + 30 * 60 * 1000
 
     return resetToken;
 }

@@ -74,9 +74,9 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     //send it to user's email
-    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`
+    const resetPasswordUrl = `http://localhost:3000/password/reset/${resetToken}`
 
-    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then ignore it `
+    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested for this email then ignore it `
 
     try {
         await sendEmail({
@@ -85,35 +85,37 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
             subject: "Shopping app reset password",
             message,
         })
-        res.status(200).json({ success: true, message: `Email sent to ${user.email} successfully`, resetPasswordUrl })
+        res.status(200).json({ success: true, message: `Email sent to ${user.email} successfully` })
     } catch (error) {
         user.resetPasswordToken = undefined
         user.resetPasswordExpire = undefined
+
         await user.save({ validateBeforeSave: false });
 
-
-        next(new ErrorHandler(error.message, 500))
+        return next(new ErrorHandler(error.message, 500))
     }
 })
 
 exports.resetPassword = catchAsyncError(async (req, res, next) => {
-    const resetPasswordToken = crypto.createHash("sha256").update(req.params.tken).digest("hex")
-    const user = await user.findOne({
+
+    const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
+
+    const user = await User.findOne({
         resetPasswordToken,
         resetPasswordExpire: { $gt: Date.now() }
 
     })
     if (!user) {
-        return next(new ErrorHandler("Reset password token in expired or has been invalid", 400))
+        return next(new ErrorHandler("Reset password token is expired or has been invalid", 400))
     }
-    if (req.body.password !== req.body.confirPassword) {
+    if (req.body.password !== req.body.confirmPassword) {
         return next(new ErrorHandler("Password does not matched", 400))
     }
     user.password = req.body.password
     user.resetPasswordToken = undefined
     user.resetPasswordExpire = undefined
 
-    user.save()
+    await user.save()
     setToken(user, 200, res)
 
 })

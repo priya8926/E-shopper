@@ -18,8 +18,8 @@ function UpdateProfile() {
   const { user } = useSelector((state) => state.user)
   const { error, loading, isUpdated } = useSelector((state) => state.profile)
 
-  const [name, setName] = useState()
-  const [email, setEmail] = useState()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
 
   const [avatar, setAvatar] = useState("https://w7.pngwing.com/pngs/717/24/png-transparent-computer-icons-user-profile-user-account-avatar-heroes-silhouette-black-thumbnail.png")
 
@@ -68,7 +68,7 @@ function UpdateProfile() {
       })
     }
   }, [dispatch, error, alert, user, isUpdated])
-  return (
+  return (  
     <>
       {loading ? <Loading /> : (<>
       <Metadata title={"update profile"}/>

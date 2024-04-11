@@ -23,4 +23,12 @@ export const Update_Password_SUCCESS = "Update_Password_SUCCESS"
 export const Update_Password_RESET = "Update_Password_RESET"
 export const Update_Password_FAILURE = "Update_Profile_FAILURE"
 
+export const Forgot_Password_REQUEST = "Forgot_Password_REQUEST"
+export const Forgot_Password_SUCCESS = "Forgot_Password_SUCCESS"
+export const Forgot_Password_FAILURE = "Forgot_Profile_FAILURE"
+
+export const Reset_Password_REQUEST = "Reset_Password_REQUEST"
+export const Reset_Password_SUCCESS = "Reset_Password_SUCCESS"
+export const Reset_Password_FAILURE = "Forgot_Profile_FAILURE"
+
 export const CLEAR_ERRORS = "CLEAR_ERRORS"

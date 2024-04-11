@@ -15,6 +15,8 @@ import Profile from './components/User/Profile';
 import UpdateProfile from './components/User/UpdateProfile';
 import ProtectedRoute from './components/Route/ProtectedRoute';
 import UpdatePassword from './components/User/UpdatePassword';
+import ForgotPassword from './components/User/ForgotPassword';
+import ResetPassword from './components/User/ResetPassword';
 
 function App() {
   const location = useLocation();
@@ -57,8 +59,12 @@ function App() {
 
         <Route exact path="/login" element={<LoginSignup />} />
 
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
+
+        <Route exact path="/password/reset/:token" element={<ResetPassword />} />
+
       </Routes>
-      {location.pathname.startsWith("/login") || location.pathname.startsWith("/me/update") ? null : <Footer />}
+      {location.pathname.startsWith("/login") || location.pathname.startsWith("/me/update") || location.pathname.startsWith("/password/update") || location.pathname.startsWith("/password/forgot") ? null : <Footer />}
 
     </>
   );
