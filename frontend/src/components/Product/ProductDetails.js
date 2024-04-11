@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Carousel from "react-material-ui-carousel"
 import './ProducuDetails.css'
 import { useSelector, useDispatch } from "react-redux"
@@ -9,6 +9,7 @@ import ReviewCart from './ReviewCart'
 import Loading from '../Layout/Loader/Loading'
 import { useAlert } from "react-alert"
 import Metadata from '../Layout/Metadata'
+import { addItemsToCart } from "../../actions/cartActions"
 
 
 function ProductDetails() {
@@ -16,7 +17,28 @@ function ProductDetails() {
     const { id } = useParams();
     const alert = useAlert()
     const { product, error, loading } = useSelector(state => state.productDetails);
+    const { cartItems } = useSelector(state => state.cart);
 
+    const [quantity, setQuantity] = useState(1)
+
+    const increaseQuantity = () => {
+        if (product.stock <= quantity) return;
+        const qty = quantity + 1
+        setQuantity(qty)
+    }
+    const decreaseQuantity = () => {
+        if (quantity === 1) {
+            return;
+        } else {
+            const qty = quantity - 1
+            setQuantity(qty)
+        }
+    }
+    const addToCartHandler = () => {
+        dispatch(addItemsToCart(id, quantity))
+        alert.success("Item added to cart")
+        console.log(cartItems, "cart")
+    }
     const options = {
         edit: false,
         color: "grey",
@@ -33,7 +55,7 @@ function ProductDetails() {
             dispatch(getProductDetails(id));
         }
     }, [dispatch, id, error, alert])
-    
+
     return (
         <>
             {loading ? <Loading /> : (
@@ -215,22 +237,24 @@ function ProductDetails() {
                                 <div className="d-flex align-items-center mb-4 pt-2">
                                     <div className="input-group quantity mr-3" style={{ width: 130 }}>
                                         <div className="input-group-btn">
-                                            <button className="btn btn-primary btn-minus">
+                                            <button className="btn btn-primary btn-minus" onClick={decreaseQuantity}>
                                                 <i className="fa fa-minus" />
                                             </button>
                                         </div>
                                         <input
                                             type="text"
                                             className="form-control bg-secondary text-center"
-                                            defaultValue={1}
+                                            readOnly
+                                            value={quantity}
+
                                         />
                                         <div className="input-group-btn">
-                                            <button className="btn btn-primary btn-plus">
+                                            <button className="btn btn-primary btn-plus" onClick={increaseQuantity}>
                                                 <i className="fa fa-plus" />
                                             </button>
                                         </div>
                                     </div>
-                                    <button className="btn btn-primary px-3">
+                                    <button className="btn btn-primary px-3" onClick={addToCartHandler}>
                                         <i className="fa fa-shopping-cart mr-1" /> Add To Cart
                                     </button>
                                 </div>

@@ -35,9 +35,8 @@ function Allproducts({ data }) {
                             <i className="fas fa-eye text-primary mr-1" />
                             View Detail
                         </Link>
-                        <Link className="btn btn-sm text-dark p-0">
-                            <i className="fas fa-shopping-cart text-primary mr-1" />
-                            Add To Cart
+                        <Link className="btn btn-md text-dark p-0">
+                        <i className="fas fa-heart text-primary" />
                         </Link>
                     </div>
                     <div className='card-footer d-flex justify-content-between bg-light border'>

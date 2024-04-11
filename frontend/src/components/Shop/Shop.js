@@ -99,7 +99,6 @@ function Shop() {
                     min={0}
                     max={5}
                   />
-                  {console.log(ratings, "rating")}
                 </div>
                 {/* Color Start */}
                 <div className="border-bottom mb-4 pb-4">

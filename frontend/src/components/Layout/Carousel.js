@@ -1,6 +1,7 @@
 import React from 'react'
 import img1 from '../../img/carousel-1.jpg'
 import img2 from '../../img/carousel-2.jpg'
+import { Link } from 'react-router-dom'
 
 function Carousel() {
     return (
@@ -21,9 +22,9 @@ function Carousel() {
                                 <h3 className="display-4 text-white font-weight-semi-bold mb-4">
                                     Fashionable Dress
                                 </h3>
-                                <a href="" className="btn btn-light py-2 px-3">
+                                <Link to="/Products" className="btn btn-light py-2 px-3">
                                     Shop Now
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -37,9 +38,9 @@ function Carousel() {
                                 <h3 className="display-4 text-white font-weight-semi-bold mb-4">
                                     Reasonable Price
                                 </h3>
-                                <a href="" className="btn btn-light py-2 px-3">
+                                <Link to="/Products" className="btn btn-light py-2 px-3">
                                     Shop Now
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
