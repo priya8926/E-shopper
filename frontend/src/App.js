@@ -18,6 +18,8 @@ import UpdatePassword from './components/User/UpdatePassword';
 import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from './components/User/ResetPassword';
 import Cart from './components/Cart/Cart'
+import Shipping from './components/Cart/Shipping';
+import ConfirmOrder from './components/Cart/ConfirmOrder';
 
 function App() {
   const location = useLocation();
@@ -28,9 +30,13 @@ function App() {
     dispatch(loadUser());
   }, [dispatch]);
 
+  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment'].includes(location.pathname);
+
+  const isFooterVisible = !["/login" , "/me/update" ,"/password/update" , "/password/forgot" ,"/shipping" , '/order/confirm'].includes(location.pathname);
+
   return (
     <>
-      <Navbar />
+       {isNavbarVisible && <Navbar />}
       <Routes>
         <Route exact path="/" element={<Home />} />
 
@@ -58,14 +64,20 @@ function App() {
           </ProtectedRoute>
         } />
 
-        {/* <Route path="/cart" element={
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
-        } /> */}
-
         <Route exact path="/cart" element={<Cart />} />
-        
+
+        <Route exact path="/shipping" element={
+          <ProtectedRoute>
+            <Shipping />
+          </ProtectedRoute>
+        } />
+
+        <Route exact path="/order/confirm" element={
+          <ProtectedRoute>
+            <ConfirmOrder />
+          </ProtectedRoute>
+        } />
+
         <Route exact path="/login" element={<LoginSignup />} />
 
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
@@ -73,7 +85,7 @@ function App() {
         <Route exact path="/password/reset/:token" element={<ResetPassword />} />
 
       </Routes>
-      {location.pathname.startsWith("/login") || location.pathname.startsWith("/me/update") || location.pathname.startsWith("/password/update") || location.pathname.startsWith("/password/forgot") ? null : <Footer />}
+      {isFooterVisible && <Footer/>}
 
     </>
   );

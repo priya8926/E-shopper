@@ -1,11 +1,15 @@
-import {ADD_TO_CART, REMOVE_CART_ITEM} from '../constants/cartConstant'
+import {
+    ADD_TO_CART,
+    REMOVE_CART_ITEM,
+    SAVE_SHIPPING_INFO
+} from '../constants/cartConstant'
 import axios from "axios"
 
 // add to cart
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
 
     const { data } = await axios.get(`/api/v1/getproduct/${id}`)
-    console.log("data" , data)
+    console.log("data", data)
 
     dispatch({
         type: ADD_TO_CART,
@@ -18,14 +22,22 @@ export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
             quantity
         }
     })
-    localStorage.setItem("cartItems",JSON.stringify(getState().cart.cartItems))
+    localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems))
 }
 
 // remove item from cart
-export const removeItemFromCart = (id) =>async(dispatch , getState) =>{
+export const removeItemFromCart = (id) => async (dispatch, getState) => {
     dispatch({
-        type : REMOVE_CART_ITEM,
-        payload : id
+        type: REMOVE_CART_ITEM,
+        payload: id
     })
-    localStorage.setItem("cartItems",JSON.stringify(getState().cart.cartItems))
+    localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems))
 }
+// save shipping information
+export const saveShippingInfo = (data) => (dispatch) => {
+    dispatch({
+        type: SAVE_SHIPPING_INFO,
+        payload: data
+    });
+    localStorage.setItem("shippingInfo", JSON.stringify(data))
+};

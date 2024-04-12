@@ -1,21 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './LoginSignup.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate , useLocation} from 'react-router-dom'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOpenIcon from '@mui/icons-material/LockOpen'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import Loading from '../Layout/Loader/Loading';
 import { useSelector, useDispatch } from "react-redux"
-import { login, clearErros , register } from '../../actions/userActions';
+import { login, clearErros, register } from '../../actions/userActions';
 import { useAlert } from 'react-alert';
 
-function LoginSignup({history}) {
+function LoginSignup() {
     const loginTab = useRef(null)
     const registerTab = useRef(null)
     const switcherTab = useRef(null)
     const dispatch = useDispatch()
     const alert = useAlert()
     const navigate = useNavigate()
+    const { search } = useLocation();
 
     const [loginEmail, setLoginEmail] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
@@ -26,9 +27,9 @@ function LoginSignup({history}) {
         password: "",
     })
 
-    const { error, loading , isAuthenticated } = useSelector((state) => state.user)
+    const { error, loading, isAuthenticated } = useSelector((state) => state.user)
     const { name, email, password } = user
-    
+
     const [avatar, setAvatar] = useState("https://w7.pngwing.com/pngs/717/24/png-transparent-computer-icons-user-profile-user-account-avatar-heroes-silhouette-black-thumbnail.png")
 
     const [avatarPreview, setAvatarPreview] = useState("https://w7.pngwing.com/pngs/717/24/png-transparent-computer-icons-user-profile-user-account-avatar-heroes-silhouette-black-thumbnail.png")
@@ -47,7 +48,7 @@ function LoginSignup({history}) {
         myForm.set("password", password)
         myForm.set("avatar", avatar)
 
-       dispatch(register(myForm))
+        dispatch(register(myForm))
     }
 
     const registerDataChange = (e) => {
@@ -69,15 +70,18 @@ function LoginSignup({history}) {
         }
     }
 
+    const redirect = location.search ? location.search.split("=")[1] : "/account";
+
+
     useEffect(() => {
         if (error) {
             alert.error("Invalid Creadential")
             dispatch(clearErros())
         }
-        if(isAuthenticated){
-            navigate("/account");
+        if (isAuthenticated) {
+            navigate(redirect);
         }
-    }, [dispatch, error, alert , history, isAuthenticated])
+    }, [dispatch, error, alert, history, isAuthenticated , redirect])
 
     const switchTabs = (e, tab) => {
         if (tab === "login") {

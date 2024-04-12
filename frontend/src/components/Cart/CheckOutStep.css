@@ -1,0 +1,11 @@
+.MuiStepper-line{
+display: none;
+}
+/* .MuiStepper-root{
+    height: 1px;
+    background-color: black;
+} */
+.MuiStepper-active,
+.MuiStepper-completed{
+    background-color: #D19C97;
+}

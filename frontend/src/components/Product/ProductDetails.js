@@ -3,19 +3,21 @@ import Carousel from "react-material-ui-carousel"
 import './ProducuDetails.css'
 import { useSelector, useDispatch } from "react-redux"
 import { clearErros, getProductDetails } from '../../actions/productActions'
-import { useParams } from 'react-router-dom';
+import { useParams , useNavigate } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component"
 import ReviewCart from './ReviewCart'
 import Loading from '../Layout/Loader/Loading'
 import { useAlert } from "react-alert"
 import Metadata from '../Layout/Metadata'
 import { addItemsToCart } from "../../actions/cartActions"
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 
 function ProductDetails() {
     const dispatch = useDispatch()
     const { id } = useParams();
     const alert = useAlert()
+    const navigate = useNavigate()
     const { product, error, loading } = useSelector(state => state.productDetails);
     const { cartItems } = useSelector(state => state.cart);
 
@@ -38,6 +40,9 @@ function ProductDetails() {
         dispatch(addItemsToCart(id, quantity))
         alert.success("Item added to cart")
         console.log(cartItems, "cart")
+    }
+    const BuynowHandler = ()=>{
+        navigate("/shipping")
     }
     const options = {
         edit: false,
@@ -256,6 +261,9 @@ function ProductDetails() {
                                     </div>
                                     <button className="btn btn-primary px-3" onClick={addToCartHandler}>
                                         <i className="fa fa-shopping-cart mr-1" /> Add To Cart
+                                    </button>
+                                    <button className="btn btn-primary mx-3" onClick={BuynowHandler}>
+                                    <KeyboardArrowRightIcon/>Buy Now
                                     </button>
                                 </div>
                                 <p className='textcolor'>
