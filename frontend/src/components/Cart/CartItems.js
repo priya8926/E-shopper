@@ -41,7 +41,7 @@ function CartItems({ item }) {
                 </div>
                 <div className="d-flex align-items-center justify-content-space-between" style={{ width: "31%" }} >
                   <div className='col-sm'>
-                    <div className="input-group quantity mr-3 " style={{ width: 130 }}>
+                    <div className="input-group quantity mr-3" style={{ width: 130 , marginLeft:"-21px"}}>
                       <div className="input-group-btn">
                         <button className="btn btn-primary btn-minus" onClick={() => decreaseQuantity(item.product, item.quantity)} >
                           <i className="fa fa-minus" />

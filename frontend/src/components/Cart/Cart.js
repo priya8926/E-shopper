@@ -25,7 +25,7 @@ function Cart() {
                                 <p>Subtotal</p>
                             </div>
                             {cartItems && cartItems.map((item) => (
-                                <div className="cartContainer">
+                                <div className="cartContainer" key={item.product}>
                                     <CartItems item={item} />
                                 </div>
                             ))}
@@ -34,7 +34,10 @@ function Cart() {
                             <div></div>
                             <div className="cartTotalPrice">
                                 <p>Total</p>
-                                <p>{`₹${600}`}</p>
+                                <p>{`₹${cartItems.reduce(
+                                    (acc, item) => acc + item.price * item.quantity,
+                                    0
+                                )}`}</p>
                             </div>
                             <div></div>
                             <div className="checkout">
