@@ -57,6 +57,7 @@ function App() {
             <UpdatePassword />
           </ProtectedRoute>
         } />
+
         {/* <Route path="/cart" element={
           <ProtectedRoute>
             <Cart />
@@ -64,6 +65,7 @@ function App() {
         } /> */}
 
         <Route exact path="/cart" element={<Cart />} />
+        
         <Route exact path="/login" element={<LoginSignup />} />
 
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
