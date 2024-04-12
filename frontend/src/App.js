@@ -17,6 +17,7 @@ import ProtectedRoute from './components/Route/ProtectedRoute';
 import UpdatePassword from './components/User/UpdatePassword';
 import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from './components/User/ResetPassword';
+import Cart from './components/Cart/Cart'
 
 function App() {
   const location = useLocation();
@@ -56,7 +57,13 @@ function App() {
             <UpdatePassword />
           </ProtectedRoute>
         } />
+        {/* <Route path="/cart" element={
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        } /> */}
 
+        <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/login" element={<LoginSignup />} />
 
         <Route exact path="/password/forgot" element={<ForgotPassword />} />

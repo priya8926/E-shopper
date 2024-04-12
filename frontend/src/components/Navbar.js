@@ -11,6 +11,8 @@ function Navbar() {
 
     const navigate = useNavigate()
     const { user, isAuthenticated } = useSelector(state => state.user);
+    const { cartItems } = useSelector(state => state.cart)
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -80,9 +82,9 @@ function Navbar() {
                         <i className="fas fa-heart text-primary" />
                         <span className="badge">0</span>
                     </Link>
-                    <Link to="" className="btn border">
+                    <Link to="/cart" className="btn border">
                         <i className="fas fa-shopping-cart text-primary" />
-                        <span className="badge">0</span>
+                        <span className="badge">{cartItems.length}</span>
                     </Link>
                     <Link  className="btn useroption">
                         {isAuthenticated ? <UserOption user={user} /> : (
