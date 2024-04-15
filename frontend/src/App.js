@@ -9,7 +9,7 @@ import ProductDetails from './components/Product/ProductDetails';
 import LoginSignup from './components/User/LoginSignup';
 import store from './store'
 import { loadUser } from './actions/userActions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Profile from './components/User/Profile';
 import UpdateProfile from './components/User/UpdateProfile';
@@ -20,6 +20,10 @@ import ResetPassword from './components/User/ResetPassword';
 import Cart from './components/Cart/Cart'
 import Shipping from './components/Cart/Shipping';
 import ConfirmOrder from './components/Cart/ConfirmOrder';
+import axios from 'axios';
+import Payment from './components/Cart/Payment';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 function App() {
   const location = useLocation();
@@ -28,15 +32,24 @@ function App() {
 
   useEffect(() => {
     dispatch(loadUser());
+    getStripeApiKey()
   }, [dispatch]);
 
-  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment'].includes(location.pathname);
+  const [stripeApiKey, setStripeApiKey] = useState("")
 
-  const isFooterVisible = !["/login" , "/me/update" ,"/password/update" , "/password/forgot" ,"/shipping" , '/order/confirm'].includes(location.pathname);
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v1/stripeApiKey")
+
+    setStripeApiKey(data.stripeApiKey)
+    console.log(data.stripeApiKey, "keyyyy")
+  }
+  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment"].includes(location.pathname);
+
+  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment"].includes(location.pathname);
 
   return (
     <>
-       {isNavbarVisible && <Navbar />}
+      {isNavbarVisible && <Navbar />}
       <Routes>
         <Route exact path="/" element={<Home />} />
 
@@ -78,6 +91,20 @@ function App() {
           </ProtectedRoute>
         } />
 
+        {
+          stripeApiKey &&(
+
+          <Route exact path="/process/payment" element={
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            </Elements>
+          } />
+
+          )
+        }
+
         <Route exact path="/login" element={<LoginSignup />} />
 
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
@@ -85,7 +112,7 @@ function App() {
         <Route exact path="/password/reset/:token" element={<ResetPassword />} />
 
       </Routes>
-      {isFooterVisible && <Footer/>}
+      {isFooterVisible && <Footer />}
 
     </>
   );

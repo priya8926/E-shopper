@@ -3,12 +3,13 @@ import './ConfirmOrder.css'
 import Metadata from '../Layout/Metadata'
 import CheckOutStep from './CheckOutStep'
 import { useSelector } from "react-redux"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
 
 function ConfirmOrder() {
     const { shippingInfo, cartItems} = useSelector(state => state.cart)
     const { user } = useSelector(state => state.user)
+    const navigate = useNavigate()
 
     const subtotal = cartItems.reduce((acc , item) => acc + item.price * item.quantity, 0)
 
@@ -20,12 +21,21 @@ function ConfirmOrder() {
 
     const address = `${shippingInfo.address} ,${shippingInfo.city} , ${shippingInfo.state} , ${shippingInfo.country} , ${shippingInfo.pincode}`
 
+    const proceedToPayment =()=>{
+        const data = {
+            subtotal,
+            ShippingCharges,
+            tax ,
+            totalPrice
+        }
+        sessionStorage.setItem("orderInfo" , JSON.stringify(data))
+        navigate("/process/payment")
+        
+    }
     return (
         <>
             <Metadata titile="confirm order -- EShopper" />
             <div className='mt-5'>
-
-
                 <CheckOutStep activeStep={1} />
                 <div className="confirmOrderPage">
                     <div>
@@ -87,7 +97,7 @@ function ConfirmOrder() {
                                 </p>
                                 <span>₹{totalPrice}</span>
                             </div>
-                            <button>Proceed To Payment</button>
+                            <button onClick={proceedToPayment}>Proceed To Payment</button>
                         </div>
                     </div>
                 </div>
