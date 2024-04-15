@@ -24,16 +24,13 @@ import axios from 'axios';
 import Payment from './components/Cart/Payment';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import OrderSuccess from './components/Cart/OrderSuccess';
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector(state => state.user);
 
-  useEffect(() => {
-    dispatch(loadUser());
-    getStripeApiKey()
-  }, [dispatch]);
 
   const [stripeApiKey, setStripeApiKey] = useState("")
 
@@ -41,11 +38,17 @@ function App() {
     const { data } = await axios.get("/api/v1/stripeApiKey")
 
     setStripeApiKey(data.stripeApiKey)
-    console.log(data.stripeApiKey, "keyyyy")
+    
   }
-  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment"].includes(location.pathname);
+  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment" , "/order/success"].includes(location.pathname);
 
-  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment"].includes(location.pathname);
+  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment" , "/order/success"].includes(location.pathname);
+
+  
+  useEffect(() => {
+    dispatch(loadUser());
+    getStripeApiKey()
+  }, []);
 
   return (
     <>
@@ -104,6 +107,12 @@ function App() {
 
           )
         }
+
+        <Route exact path="/order/success" element={
+          <ProtectedRoute>
+            <OrderSuccess />
+          </ProtectedRoute>
+        } />
 
         <Route exact path="/login" element={<LoginSignup />} />
 
