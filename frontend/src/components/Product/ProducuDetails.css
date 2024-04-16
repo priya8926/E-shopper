@@ -124,3 +124,13 @@
     margin-bottom: 4vmax;
     margin-top: 4vmax;
 }
+.submitDialog{
+    display: flex;
+    flex-direction: column;
+}
+.submitDialogTextArea{
+    border: 1px solid black;
+    margin: 1vmax 0;
+    outline: none;
+    padding: 1rem;
+}

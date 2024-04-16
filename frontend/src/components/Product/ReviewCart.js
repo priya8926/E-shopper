@@ -1,14 +1,12 @@
 import React from 'react'
-import ReactStars from "react-rating-stars-component"
 import profilepng from "../../img/user.png"
+import { Rating } from '@mui/material'
 
 function ReviewCart({ review }) {
     const options = {
-        edit: false,
-        color: "grey",
-        activeColor: "#ffc107 ",
         value: review.rating,
-        isHalf: true
+        readOnly: true,
+        precision : 0.5
     };
     return (
         <>
@@ -17,8 +15,7 @@ function ReviewCart({ review }) {
                     <h5 className=""><img src={profilepng} alt='user' /></h5>
                     <h6 className=" mb-2 text-body-secondary">  <p>{review.name}</p></h6>
                     <p className=" d-flex justify-content-center">
-                        <ReactStars {...options} />
-                       
+                        <Rating {...options} />
                     </p>
                     <p className="">
                         <span>{review.comment}</span>

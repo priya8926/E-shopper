@@ -1,15 +1,14 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import ReactStars from "react-rating-stars-component"
+import { Rating } from '@mui/material'
 
 function Allproducts({ data }) {
     const getRatingOptions = (rating) => {
         return {
             edit: false,
-            color: "grey",
-            activeColor: "#ffc107 ",
+            readOnly: true,
+            precision : 0.5,
             value: rating,
-            isHalf: true
         };
     };
 
@@ -40,7 +39,7 @@ function Allproducts({ data }) {
                         </Link>
                     </div>
                     <div className='card-footer d-flex justify-content-between bg-light border'>
-                        <ReactStars {...getRatingOptions(data.ratings)} /><span>{data.numOfReviews}</span>
+                        <Rating {...getRatingOptions(data.ratings)} /><span>{data.numOfReviews}</span>
                     </div>
                 </div>
             </div>

@@ -84,13 +84,13 @@ export const newReviewReducer = (state = { }, action) => {
             return {
                 ...state,
                 loading: false,
-                err: action.payload
+                error: action.payload
             }
         case NEW_REVIEW_RESET:
             return {
                 ...state,
                 loading: false,
-                err: action.payload
+                error: action.payload
             }
         case CLEAR_ERRORS:
             return {
