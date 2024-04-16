@@ -125,7 +125,7 @@ function App() {
             <OrderDetails />
           </ProtectedRoute>
         } />
-        
+
         <Route exact path="/login" element={<LoginSignup />} />
 
         <Route exact path="/password/forgot" element={<ForgotPassword />} />

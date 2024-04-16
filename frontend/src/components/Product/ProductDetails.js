@@ -3,7 +3,7 @@ import Carousel from "react-material-ui-carousel"
 import './ProducuDetails.css'
 import { useSelector, useDispatch } from "react-redux"
 import { clearErros, getProductDetails } from '../../actions/productActions'
-import { useParams , useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component"
 import ReviewCart from './ReviewCart'
 import Loading from '../Layout/Loader/Loading'
@@ -41,7 +41,7 @@ function ProductDetails() {
         alert.success("Item added to cart")
         console.log(cartItems, "cart")
     }
-    const BuynowHandler = ()=>{
+    const BuynowHandler = () => {
         navigate("/shipping")
     }
     const options = {
@@ -259,11 +259,11 @@ function ProductDetails() {
                                             </button>
                                         </div>
                                     </div>
-                                    <button className="btn btn-primary px-3" onClick={addToCartHandler}>
+                                    <button className="btn btn-primary px-3" onClick={addToCartHandler} disabled={product.stock < 1 ? true : false}>
                                         <i className="fa fa-shopping-cart mr-1" /> Add To Cart
                                     </button>
                                     <button className="btn btn-primary mx-3" onClick={BuynowHandler}>
-                                    <KeyboardArrowRightIcon/>Buy Now
+                                        <KeyboardArrowRightIcon /> Buy Now
                                     </button>
                                 </div>
                                 <p className='textcolor'>

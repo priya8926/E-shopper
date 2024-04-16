@@ -64,14 +64,7 @@ function MyOrders() {
             <DataGrid
               rows={rows}
               columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 10,
-                  },
-                },
-              }}
-              pageSizeOptions={[10]}
+              pageSize={10}
               disableRowSelectionOnClick
               autoHeight
               className='myOrdersTable'

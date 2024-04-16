@@ -12,6 +12,13 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
         paidAt: Date.now(),
         user: req.user._id
     })
+    if (order.orderStatus === "Delivered") {
+        return next(new ErrorHandler("You have already delivered this product", 400))
+    }
+        order.orderItems.forEach(async (item) => {
+            await updateStock(item.product, item.quantity)
+        })
+
     res.status(200).json({ success: true, order })
 })
 
@@ -60,24 +67,27 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler('No Order Found', 401))
     }
     if (order.orderStatus === "Delivered") {
-        return next(new ErrorHandler("You have already deliverd this product", 400))
+        return next(new ErrorHandler("You have already delivered this product", 400))
     }
-    order.orderItems.forEach(async (item) => {
-        await updateStock(item.product, item.quantity)
-    })
-    order.orderStatus = req.body.status;
+        order.orderItems.forEach(async (item) => {
+            await updateStock(item.product, item.quantity)
+        })
+
     if (order.orderStatus === "Delivered") {
         order.deliverdAt = Date.now();
     }
 
+    order.orderStatus = req.body.status;
+
     await order.save({ validateBeforeSave: false });
 
-    res.status(200).json({ success: true, order })
+    res.status(200).json({ success: true })
 
 })
-async function updateStock(id , quantity){
+//update stock
+async function updateStock(id, quantity) {
     const product = await Product.findById(id)
-    product.stock = product.stock - quantity
+    product.stock -= quantity
     await product.save({ validateBeforeSave: false });
 }
 // delete order --admin

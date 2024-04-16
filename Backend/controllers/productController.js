@@ -25,6 +25,7 @@ exports.getAllProduct = async (req, res) => {
         apifeatures.pagination(resultPerPage);
 
         res.status(201).json({ success: true, products,productsCount,resultPerPage,filterProductByCount })
+        
     } catch (error) {
         console.log("error getting product", error)
     }
@@ -111,7 +112,7 @@ exports.reviewProduct = catchAsyncError(async (req, res, next) => {
         data: 'Review added'
     })
 })
-// get all review of single product
+// get all reviews of single product
 exports.getAllProductReview = catchAsyncError(async (req, res, next) => {
     const product = await Product.findById(req.query.id)
 
