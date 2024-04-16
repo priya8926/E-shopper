@@ -24,7 +24,6 @@ function Profile() {
                             <img src={user.avatar && user.avatar.url ? user.avatar.url : "https://w7.pngwing.com/pngs/717/24/png-transparent-computer-icons-user-profile-user-account-avatar-heroes-silhouette-black-thumbnail.png"} alt="profile img" />
                             <Link to="/me/update">Edit Profile</Link>
                         </div>
-                        {console.log("imggg ", user.avatar)}
 
                         <div>
                             <div>

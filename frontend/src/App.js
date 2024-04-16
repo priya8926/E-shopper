@@ -7,7 +7,6 @@ import Navbar from './components/Navbar';
 import Shop from './components/Shop/Shop';
 import ProductDetails from './components/Product/ProductDetails';
 import LoginSignup from './components/User/LoginSignup';
-import store from './store'
 import { loadUser } from './actions/userActions';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,12 +24,13 @@ import Payment from './components/Cart/Payment';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './components/Cart/OrderSuccess';
+import MyOrders from './components/Order/MyOrders';
+import OrderDetails from './components/Order/OrderDetails';
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector(state => state.user);
-
 
   const [stripeApiKey, setStripeApiKey] = useState("")
 
@@ -38,13 +38,13 @@ function App() {
     const { data } = await axios.get("/api/v1/stripeApiKey")
 
     setStripeApiKey(data.stripeApiKey)
-    
   }
-  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment" , "/order/success"].includes(location.pathname);
 
-  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment" , "/order/success"].includes(location.pathname);
+  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success"].includes(location.pathname);
 
-  
+  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success"].includes(location.pathname);
+
+
   useEffect(() => {
     dispatch(loadUser());
     getStripeApiKey()
@@ -54,6 +54,7 @@ function App() {
     <>
       {isNavbarVisible && <Navbar />}
       <Routes>
+
         <Route exact path="/" element={<Home />} />
 
         <Route exact path="/Products" element={<Shop />} />
@@ -95,15 +96,14 @@ function App() {
         } />
 
         {
-          stripeApiKey &&(
-
-          <Route exact path="/process/payment" element={
-            <Elements stripe={loadStripe(stripeApiKey)}>
-              <ProtectedRoute>
-                <Payment />
-              </ProtectedRoute>
-            </Elements>
-          } />
+          stripeApiKey && (
+            <Route exact path="/process/payment" element={
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <ProtectedRoute>
+                  <Payment />
+                </ProtectedRoute>
+              </Elements>
+            } />
 
           )
         }
@@ -114,6 +114,18 @@ function App() {
           </ProtectedRoute>
         } />
 
+        <Route exact path="/orders" element={
+          <ProtectedRoute>
+            <MyOrders />
+          </ProtectedRoute>
+        } />
+
+        <Route exact path="/order/:id" element={
+          <ProtectedRoute>
+            <OrderDetails />
+          </ProtectedRoute>
+        } />
+        
         <Route exact path="/login" element={<LoginSignup />} />
 
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
@@ -121,6 +133,7 @@ function App() {
         <Route exact path="/password/reset/:token" element={<ResetPassword />} />
 
       </Routes>
+
       {isFooterVisible && <Footer />}
 
     </>

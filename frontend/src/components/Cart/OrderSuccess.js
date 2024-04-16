@@ -10,7 +10,7 @@ function OrderSuccess() {
       <div className="orderSuccess">
         <CheckCircleIcon/>
         <Typography>Your Order has been placed successfully</Typography>
-        <Link to="/myorder">View Orders</Link>
+        <Link to="/orders">View Orders</Link>
       </div>
     </>
   )

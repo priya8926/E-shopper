@@ -3,6 +3,7 @@ import './CartItem.css'
 import { Link } from "react-router-dom"
 import { useAlert } from "react-alert"
 import { useDispatch, useSelector } from "react-redux"
+import ClearIcon from '@mui/icons-material/Clear';
 import { addItemsToCart, removeItemFromCart } from '../../actions/cartActions'
 
 function CartItems({ item }) {
@@ -36,7 +37,7 @@ function CartItems({ item }) {
                     </Link>
                     <span>{`Price ₹${item.price}`}</span>
                     <p style={{ color: "#D19C97", cursor: "pointer" }} onClick={() => deleteCartItem(item.product)}>
-                      <i className="fas fa-xmark" ></i>X remove</p>
+                      <i className="fas fa-xmark" ></i> <ClearIcon/> remove</p>
                   </div>
                 </div>
                 <div className="d-flex align-items-center justify-content-space-between" style={{ width: "31%" }} >
