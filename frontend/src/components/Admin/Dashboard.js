@@ -8,7 +8,7 @@ import Chart from 'chart.js/auto';
 
 function Dashboard() {
     const lineState = {
-        labels : ["Intial Amount" , "Amount Earned"],
+        labels : ["Initial Amount" , "Amount Earned"],
         datasets : [
             {
                 label : "Total Amount",
@@ -16,6 +16,16 @@ function Dashboard() {
                 hoverBackgroundColor : ["#7669e1"],
                 borderWidth: 2,
                 data : [0,4000]
+            }
+        ]
+    }
+    const doughnutState = {
+        labels : ["Out of Stock" , "In Stock"],
+        datasets : [
+            {
+                backgroundColor : ["rgb(132, 33, 226)" , "rgb(15, 220, 128)"],
+                hoverBackgroundColor : ["rgb(63, 4, 118)" , "rgb(6, 135, 77)"],
+                data : [2,10]
             }
         ]
     }
@@ -49,6 +59,9 @@ function Dashboard() {
                     </div>
                     <div className="lineChart">
                         <Line data={lineState} />
+                    </div>
+                    <div className="doughnutChart">
+                        <Doughnut data={doughnutState} />
                     </div>
                 </div>
             </div>

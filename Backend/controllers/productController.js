@@ -12,7 +12,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 
 })
 
-//get products
+//get All products
 exports.getAllProduct = async (req, res) => {
     try {
         const resultPerPage = 8
@@ -30,6 +30,13 @@ exports.getAllProduct = async (req, res) => {
         console.log("error getting product", error)
     }
 }
+
+//get All products -- admin
+exports.getAdminProducts = catchAsyncError(async(req,res,next) =>{
+    const products = await Product.find()
+
+    res.status(201).json({success :true , products});
+})
 
 // update product --- admin
 exports.updateProduct = async (req, res, next) => {
