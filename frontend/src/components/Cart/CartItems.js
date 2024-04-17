@@ -10,6 +10,7 @@ function CartItems({ item }) {
   const dispatch = useDispatch()
   const alert = useAlert()
   const { cartItems } = useSelector(state => state.cart);
+  const { product } = useSelector(state => state.productDetails)
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1
@@ -27,49 +28,51 @@ function CartItems({ item }) {
   }
   return (
     <>
-            <div className="">
-              <div className="row mt-4 ">
-                <div className="col-sm-8 d-flex px-5 ">
-                  <img src={item.image} alt="product image" style={{ height: "100px" }} />
-                  <div className='px-5 d-flex flex-column '>
-                    <Link to={`/Product/${item.product}`}>
-                      {item.name}
-                    </Link>
-                    <span>{`Price ₹${item.price}`}</span>
-                    <p style={{ color: "#D19C97", cursor: "pointer" }} onClick={() => deleteCartItem(item.product)}>
-                      <i className="fas fa-xmark" ></i> <ClearIcon/> remove</p>
-                  </div>
-                </div>
-                <div className="d-flex align-items-center justify-content-space-between" style={{ width: "31%" }} >
-                  <div className='col-sm'>
-                    <div className="input-group quantity mr-3" style={{ width: 130 , marginLeft:"-21px"}}>
-                      <div className="input-group-btn">
-                        <button className="btn btn-primary btn-minus" onClick={() => decreaseQuantity(item.product, item.quantity)} >
-                          <i className="fa fa-minus" />
-                        </button>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control bg-secondary text-center"
-                        readOnly
-                        value={item.quantity}
+        <div className="">
+          <div className="row mt-4 ">
+            <div className="col-sm-8 d-flex px-5 ">
+              <img src={item.image} alt="product image" style={{ height: "100px" }} />
+              <div className='px-5 d-flex flex-column '>
 
-                      />
-                      <div className="input-group-btn">
-                        <button className="btn btn-primary btn-plus" onClick={() => increaseQuantity(item.product, item.quantity, item.stock)}>
-                          <i className="fa fa-plus" />
-                        </button>
-                      </div>
-                    </div>
+                <Link to={`/Product/${item.product}`}>
+                  {item.name}
+                </Link>
+                <span>{`Price ₹${item.price}`}</span>
+                <p style={{ color: "#D19C97", cursor: "pointer" }} onClick={() => deleteCartItem(item.product)}>
+                  <i className="fas fa-xmark" ></i> <ClearIcon /> remove</p>
+              </div>
+
+            </div>
+            <div className="d-flex align-items-center justify-content-space-between" style={{ width: "31%" }} >
+              <div className='col-sm'>
+                <div className="input-group quantity mr-3" style={{ width: 130, marginLeft: "-21px" }}>
+                  <div className="input-group-btn">
+                    <button className="btn btn-primary btn-minus" onClick={() => decreaseQuantity(item.product, item.quantity)} >
+                      <i className="fa fa-minus" />
+                    </button>
                   </div>
-                  <div className='col-sm d-flex justify-content-end'>
-                    <div className="subTotal d-flex">
-                      {`₹${item.price * item.quantity}`}
-                    </div>
+                  <input
+                    type="text"
+                    className="form-control bg-secondary text-center"
+                    readOnly
+                    value={item.quantity}
+
+                  />
+                  <div className="input-group-btn">
+                    <button className="btn btn-primary btn-plus" onClick={() => increaseQuantity(item.product, item.quantity, item.stock)}>
+                      <i className="fa fa-plus" />
+                    </button>
                   </div>
                 </div>
               </div>
+              <div className='col-sm d-flex justify-content-end'>
+                <div className="subTotal d-flex">
+                  {`₹${item.price * item.quantity}`}
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
     </>
   )
 }

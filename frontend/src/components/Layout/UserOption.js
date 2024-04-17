@@ -38,7 +38,7 @@ function UserOption({ user }) {
                     {
                         user.role === "admin" &&
                         <li>
-                            <Link className="dropdown-item" to="/dashboard" >
+                            <Link className="dropdown-item" to="/admin/dashboard" >
                                 <DashboardIcon /> Dashboard
                             </Link>
                         </li>

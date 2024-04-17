@@ -22,7 +22,6 @@ function Cart() {
                         <RemoveShoppingCartIcon />
                         <h4>No items in the cart</h4>
                         <Link to="/Products">View Products</Link>
-
                     </div> : (
                         <>
                             <Metadata title="Cart -- EShopper" />

@@ -26,6 +26,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './components/Cart/OrderSuccess';
 import MyOrders from './components/Order/MyOrders';
 import OrderDetails from './components/Order/OrderDetails';
+import Dashboard from './components/Admin/Dashboard';
 
 function App() {
   const location = useLocation();
@@ -40,9 +41,9 @@ function App() {
     setStripeApiKey(data.stripeApiKey)
   }
 
-  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success"].includes(location.pathname);
+  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success" , "/admin/dashboard"].includes(location.pathname);
 
-  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success"].includes(location.pathname);
+  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success" , "/admin/dashboard"].includes(location.pathname);
 
 
   useEffect(() => {
@@ -131,6 +132,10 @@ function App() {
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
 
         <Route exact path="/password/reset/:token" element={<ResetPassword />} />
+
+        {/* Admin routes */}
+         
+         <Route  exact path='/admin/dashboard' element = {<Dashboard/>}/>
 
       </Routes>
 
