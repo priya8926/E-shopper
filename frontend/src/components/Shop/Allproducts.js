@@ -11,7 +11,9 @@ function Allproducts({ data }) {
             value: rating,
         };
     };
-
+    if (!data || !data.images || data.images.length === 0) {
+        return null; // Or you can return a placeholder or loading indicator
+    }
     return (
         <>
             <div className="col-lg-3 col-md-3 col-sm-4 pb-1">

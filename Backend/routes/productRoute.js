@@ -6,6 +6,7 @@ const router = express.Router()
 router.route("/products").get( controllers.getAllProduct)
 
 router.route("/admin/products").get(isAuthenticateUser, authorizeRoles("admin"), controllers.getAdminProducts)
+
 //create product
 router.route("/admin/products/new").post(isAuthenticateUser, authorizeRoles("admin"), controllers.createProduct)
  

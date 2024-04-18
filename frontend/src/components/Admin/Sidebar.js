@@ -38,7 +38,7 @@ function Sidebar() {
                             <TreeItem nodeId='2' label="All" icon={<PostAddIcon />} />
                         </Link>
 
-                        <Link to="/admin/product">
+                        <Link to="/admin/products/new">
                             <TreeItem nodeId='3' label="Create" icon={<AddIcon />} />
                         </Link>
 

@@ -12,6 +12,14 @@ import {
     ADMIN_PRODUCTS_REQUEST,
     ADMIN_PRODUCTS_SUCCESS,
     ADMIN_PRODUCTS_FAILURE,
+    NEW_PRODUCT_REQUEST,
+    NEW_PRODUCT_SUCCESS,
+    NEW_PRODUCT_RESET,
+    NEW_PRODUCT_FAILURE,
+    DELETE_PRODUCTS_REQUEST,
+    DELETE_PRODUCTS_SUCCESS,
+    DELETE_PRODUCTS_FAILURE,
+    DELETE_PRODUCTS_RESET,
     CLEAR_ERRORS
 } from "../constants/productConstant"
 
@@ -36,9 +44,9 @@ export const productReducer = (state = { products: [] }, action) => {
         case ADMIN_PRODUCTS_SUCCESS:
             return {
                 loading: false,
-                payload: action.payload
+                products: action.payload
             }
-            
+
         case ALL_PRODUCTS_FAILURE:
         case ADMIN_PRODUCTS_FAILURE:
             return {
@@ -112,5 +120,71 @@ export const newReviewReducer = (state = {}, action) => {
             }
         default:
             return state;
+    }
+}
+export const newProductReducer = (state = { product: {} }, action) => {
+    switch (action.type) {
+        case NEW_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case NEW_PRODUCT_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload.success,
+                product: action.payload.product,
+            };
+        case NEW_PRODUCT_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case NEW_PRODUCT_RESET:
+            return {
+                ...state,
+                success: false,
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state;
+    }
+}
+export const deleteProductReducer = (state = {}, action) => {
+    switch (action.type) {
+        case DELETE_PRODUCTS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case DELETE_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDeleted: action.payload
+            }
+        case DELETE_PRODUCTS_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case DELETE_PRODUCTS_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            break;
     }
 }

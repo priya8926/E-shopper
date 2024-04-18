@@ -2,9 +2,29 @@ const catchAsyncError = require("../middleware/catchAsyncError")
 const Product = require("../models/ProductModel")
 const ApiFeatures = require("../utils/apiFeatures")
 const ErrorHandler = require("../utils/errorhandler")
+const cloudinary = require("cloudinary")
 
 //Create product -- admin
 exports.createProduct = catchAsyncError(async (req, res, next) => {
+    let images = []
+
+    if (typeof req.body.images === "string") {
+        images.push(req.body.images)
+    } else {
+        images = req.body.images
+    }
+    const imagesLink = []
+
+    for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.v2.uploader.upload(images[i], {
+            folder: "products"
+        })
+        imagesLink.push({
+            public_id: result.public_id,
+            url: result.secure_url
+        })
+    }
+    req.body.images = imagesLink
     req.body.user = req.user.id
 
     const product = await Product.create(req.body)
@@ -15,7 +35,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 //get All products
 exports.getAllProduct = async (req, res) => {
     try {
-        const resultPerPage = 8
+        const resultPerPage = 16
         const productsCount = await Product.countDocuments()
 
         const apifeatures = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage)
@@ -24,18 +44,18 @@ exports.getAllProduct = async (req, res) => {
         let filterProductByCount = products.length;
         apifeatures.pagination(resultPerPage);
 
-        res.status(201).json({ success: true, products,productsCount,resultPerPage,filterProductByCount })
-        
+        res.status(201).json({ success: true, products, productsCount, resultPerPage, filterProductByCount })
+
     } catch (error) {
         console.log("error getting product", error)
     }
 }
 
 //get All products -- admin
-exports.getAdminProducts = catchAsyncError(async(req,res,next) =>{
+exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
     const products = await Product.find()
 
-    res.status(201).json({success :true , products});
+    res.status(201).json({ success: true, products });
 })
 
 // update product --- admin
@@ -150,7 +170,7 @@ exports.deleteProdutcReview = catchAsyncError(async (req, res, next) => {
 
     await Product.findByIdAndUpdate(req.query.productId,
         { reviews, ratings, numOfReviews }, { new: true, runValidators: true, useFindAndModify: false })
-        
+
     res.status(200).json({
         success: true,
         message: "Delete Review Successfully",
