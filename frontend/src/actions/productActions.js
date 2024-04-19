@@ -15,7 +15,13 @@ import {
     NEW_PRODUCT_SUCCESS,
     NEW_PRODUCT_RESET,
     NEW_PRODUCT_FAILURE,
-    CLEAR_ERRORS
+    DELETE_PRODUCTS_REQUEST,
+    DELETE_PRODUCTS_SUCCESS,
+    DELETE_PRODUCTS_FAILURE,
+    CLEAR_ERRORS,
+    UPDATE_PRODUCT_REQUEST,
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_FAILURE
 } from "../constants/productConstant"
 import axios from "axios"
 
@@ -68,9 +74,9 @@ export const newReview = (reviewData) => async (dispatch) => {
             type: NEW_REVIEW_REQUEST,
         })
         const config = {
-            headers : {'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         }
-        const { data } = await axios.put(`/api/v1/review` , reviewData , config)
+        const { data } = await axios.put(`/api/v1/review`, reviewData, config)
         dispatch({
             type: NEW_REVIEW_SUCCESS,
             payload: data.success,
@@ -83,15 +89,15 @@ export const newReview = (reviewData) => async (dispatch) => {
     }
 }
 // get all products --admin
-export const getAdminProduct = () => async(dispatch) =>{
+export const getAdminProduct = () => async (dispatch) => {
     try {
         dispatch({
-            type : ADMIN_PRODUCTS_REQUEST,
+            type: ADMIN_PRODUCTS_REQUEST,
         })
-        const {data} = await axios.get(`/api/v1/admin/products`)
+        const { data } = await axios.get(`/api/v1/admin/products`)
         dispatch({
-            type : ADMIN_PRODUCTS_SUCCESS,
-            payload : data.products
+            type: ADMIN_PRODUCTS_SUCCESS,
+            payload: data.products
         })
     } catch (error) {
         dispatch({
@@ -100,15 +106,15 @@ export const getAdminProduct = () => async(dispatch) =>{
         })
     }
 }
-export const createNewProuct = (productData) =>async(dispatch) =>{
+export const createNewProuct = (productData) => async (dispatch) => {
     try {
         dispatch({
-            type : NEW_PRODUCT_REQUEST,
+            type: NEW_PRODUCT_REQUEST,
         })
         const config = {
-            headers : {'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         }
-        const { data } = await axios.post(`/api/v1/admin/products/new` , productData , config)
+        const { data } = await axios.post(`/api/v1/admin/products/new`, productData, config)
 
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
@@ -117,6 +123,49 @@ export const createNewProuct = (productData) =>async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: NEW_PRODUCT_FAILURE,
+            payload: error.response.data.message,
+        })
+    }
+}
+
+//delete product -- admin
+export const deleteProduct = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: DELETE_PRODUCTS_REQUEST
+        })
+
+        const {data} = await axios.delete(`/api/v1/admin/deleteproduct/${id}`)
+
+        dispatch({
+            type: DELETE_PRODUCTS_SUCCESS,
+            payload : data.success
+        })
+    } catch (error) {
+        dispatch({
+            type: DELETE_PRODUCTS_FAILURE,
+            payload: error.response.data.message,
+        })
+    }
+}
+//update product -- admin
+export const updateProuct = (id , productData) => async (dispatch) => {
+    try {
+        dispatch({
+            type: UPDATE_PRODUCT_REQUEST,
+        })
+        const config = {
+            headers: { 'Content-Type': 'application/json' }
+        }
+        const { data } = await axios.put(`/api/v1/admin/updateproduct/${id}`, productData, config)
+
+        dispatch({
+            type: UPDATE_PRODUCT_SUCCESS,
+            payload: data.success,
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_PRODUCT_FAILURE,
             payload: error.response.data.message,
         })
     }

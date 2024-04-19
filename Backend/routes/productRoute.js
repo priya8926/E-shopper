@@ -11,7 +11,7 @@ router.route("/admin/products").get(isAuthenticateUser, authorizeRoles("admin"),
 router.route("/admin/products/new").post(isAuthenticateUser, authorizeRoles("admin"), controllers.createProduct)
  
 //update product
-router.route("/admin/updateproduct/:id").patch(isAuthenticateUser , authorizeRoles("admin"), controllers.updateProduct)
+router.route("/admin/updateproduct/:id").put(isAuthenticateUser , authorizeRoles("admin"), controllers.updateProduct)
 
 // get  one product by id
 router.route("/getproduct/:id").get( controllers.getProductDetails)

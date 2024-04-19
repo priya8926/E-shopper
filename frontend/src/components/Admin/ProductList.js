@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './ProductList.css'
 import { useNavigate, Link, useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { clearErros, getAdminProduct } from '../../actions/productActions'
+import { clearErros, getAdminProduct, deleteProduct } from '../../actions/productActions'
 import Metadata from '../Layout/Metadata'
 import { useAlert } from 'react-alert';
 import { DataGrid } from '@mui/x-data-grid';
@@ -10,14 +10,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Sidebar from './Sidebar'
 import { Button } from '@material-ui/core'
+import { DELETE_PRODUCTS_RESET } from '../../constants/productConstant'
 
 function ProductList() {
   const { error, products } = useSelector((state) => state.products)
+  const { error: deleteError, isDeleted } = useSelector(state => state.deleteProduct)
 
-  const { id } = useParams()
   const dispatch = useDispatch()
   const alert = useAlert()
 
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id))
+  }
   const columns = [
     { field: "id", headerName: "Product Id", minWidth: 200, flex: 0.5 },
     {
@@ -30,9 +34,9 @@ function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/product/${params.getValue(params.id, "id")}`}> <EditIcon />
+            <Link to={`/admin/updateproduct/${params.getValue(params.id, "id")}`}> <EditIcon />
             </Link>
-            <Button>
+            <Button onClick={() => deleteProductHandler(params.getValue(params.id, "id"))}>
               <DeleteIcon />
             </Button>
           </>
@@ -51,20 +55,27 @@ function ProductList() {
     })
   })
 
-  useEffect(()=>{
-    if(error){
+  useEffect(() => {
+    if (error) {
       alert.error(error)
       dispatch(clearErros())
     }
+    if (deleteError) {
+      alert.error(deleteError)
+      dispatch(clearErros())
+    }
+    if (isDeleted) {
+      alert.success("Product deleted successfully!")
+      dispatch({ type: DELETE_PRODUCTS_RESET })
+    }
     dispatch(getAdminProduct())
-  },[dispatch,alert,error])
+  }, [dispatch, alert, error, deleteError, isDeleted])
   return (
     <>
       <Metadata title={`All products --admin`} />
 
-
       <div className="dashboard">
-        <Sidebar/>
+        <Sidebar />
         <div className="productListContainer">
           <h1 id='productListHeading'>All Products</h1>
 

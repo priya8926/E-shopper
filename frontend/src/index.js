@@ -13,7 +13,7 @@ const options ={
   transitions : transitions.SCALE
 }
 
-store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => store.getState())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

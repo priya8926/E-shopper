@@ -13,7 +13,7 @@ import Metadata from '../Layout/Metadata';
 
 
 function Shop() {
-  const categories = ["Footwear", "Jackets", "Blazers", "Jumpsuits", "Sportswear", "Kurti", "Swimwear", "Jeans", "Shirts", "Laptop", "Smartphone", "Bedsheets"]
+  const categories = ["Footwear", "Jackets", "Blazers", "Jumpsuits", "Sportswear", "Kurti", "Swimwear", "Jeans", "Shirts", "Laptop", "Smartphone", "Bedsheets" , "Accerssories"]
 
   const { keyword } = useParams();
   const dispatch = useDispatch()

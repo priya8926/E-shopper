@@ -29,6 +29,7 @@ import OrderDetails from './components/Order/OrderDetails';
 import Dashboard from './components/Admin/Dashboard';
 import ProductList from './components/Admin/ProductList';
 import CreateNewProduct from './components/Admin/CreateNewProduct';
+import UpdateProduct from './components/Admin/UpdateProduct';
 
 function App() {
   const location = useLocation();
@@ -43,9 +44,9 @@ function App() {
     setStripeApiKey(data.stripeApiKey)
   }
 
-  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success", "/admin/dashboard" , '/admin/products' , "/admin/products/new"].includes(location.pathname);
+  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new" , '/admin/updateproduct/:id'].includes(location.pathname);
 
-  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success", "/admin/dashboard",'/admin/products' , "/admin/products/new"].includes(location.pathname);
+  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new" , '/admin/updateproduct/:id'].includes(location.pathname);
 
 
   useEffect(() => {
@@ -152,6 +153,12 @@ function App() {
         <Route isAdmin={true} exact path='/admin/products/new' element={
           <ProtectedRoute>
             <CreateNewProduct />
+          </ProtectedRoute>
+        } />
+
+        <Route isAdmin={true}  path='/admin/updateproduct/:id' element={
+          <ProtectedRoute>
+            <UpdateProduct />
           </ProtectedRoute>
         } />
 
