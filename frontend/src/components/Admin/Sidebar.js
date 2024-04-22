@@ -45,7 +45,7 @@ function Sidebar() {
                     </TreeItem>
                 </TreeView>
             </Link>
-            <Link to="/admin/orders">
+            <Link to="/admin/allorders">
                 <p>
                     <ListAltIcon /> Orders
                 </p>

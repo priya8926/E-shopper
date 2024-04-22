@@ -107,7 +107,6 @@ function UpdateProduct() {
                         encType='multipart/form-data'
                         onSubmit={updateProductSubmitHandler}>
                         <h1>Update Product</h1>
-
                         <div>
                             <SpellcheckIcon />
                             <input type="text" placeholder='Product Name' required value={name}

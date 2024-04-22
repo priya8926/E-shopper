@@ -4,12 +4,14 @@ import './Dashboard.css'
 import { Typography } from '@material-ui/core'
 import { useSelector, useDispatch } from "react-redux"
 import { getAdminProduct } from '../../actions/productActions'
+import { getAdminOrders } from '../../actions/orderAction'
 import { Link } from 'react-router-dom'
 import { Doughnut , Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 
 function Dashboard() {
     const {  products } = useSelector((state) => state.products)
+    const { orders } = useSelector((state) => state.allOrders)
 
     const dispatch = useDispatch()
     let outOfStock = 0
@@ -46,6 +48,7 @@ function Dashboard() {
   useEffect(()=>{
     
     dispatch(getAdminProduct())
+    dispatch(getAdminOrders())
 
   },[dispatch])
     return (
@@ -65,9 +68,9 @@ function Dashboard() {
                                 <p>Products</p>
                                 <p>{products.length}</p>
                             </Link>
-                            <Link to="/admin/orders">
-                                <p>orders</p>
-                                <p>4</p>
+                            <Link to="/admin/allorders">
+                                <p>Orders</p>
+                                <p>{orders.length}</p>
                             </Link>
                             <Link to="/admin/users">
                                 <p>users</p>
