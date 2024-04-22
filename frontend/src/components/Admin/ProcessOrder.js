@@ -55,7 +55,7 @@ function ProcessOrder() {
                 <div className="newProductContainer mb-5" style={{ backgroundColor: "white" }}>
                     {loading ? <Loading /> :
                         <>
-                            <div className="confirmOrderPage" style={{ gridTemplateColumns: "4fr 3fr", margin: "3vmax 2vmax" }}>
+                            <div className="confirmOrderPage" style={{ gridTemplateColumns: "4fr 3fr", margin: "3vmax 2vmax", display:order.orderStatus === "Delivered" ? "block" :"grid"}}>
                                 <div>
                                     <div className="confirmShippingArea">
                                         <Typography variant="h5">Shipping Info</Typography>
@@ -117,7 +117,7 @@ function ProcessOrder() {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="orderSummary">
+                                    <div className="orderSummary" style={{display : order.orderStatus === "Delivered" ? "none" : "block"}}>
                                         <Typography>Order Status </Typography>
                                         <form action="" onSubmit={updateOrderSubmitHandler}>
                                             <select onChange={(e) => setStatus(e.target.value)} value={status} style={{

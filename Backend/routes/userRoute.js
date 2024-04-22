@@ -19,7 +19,7 @@ router.route("/password/update").put(isAuthenticateUser, controller.updatePasswo
 
 router.route("/me/update").put(isAuthenticateUser, controller.updateProfile)
 
-router.route("/admin/getalluser").get(isAuthenticateUser, authorizeRoles("admin"), controller.getAllUsers)
+router.route("/admin/users").get(isAuthenticateUser, authorizeRoles("admin"), controller.getAllUsers)
 
 router.route("/admin/getSingleuser/:id").get(isAuthenticateUser, authorizeRoles("admin"), controller.getSingleUserDetail)
 

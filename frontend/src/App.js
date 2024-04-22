@@ -32,6 +32,9 @@ import CreateNewProduct from './components/Admin/CreateNewProduct';
 import UpdateProduct from './components/Admin/UpdateProduct';
 import OrderList from './components/Admin/OrderList';
 import ProcessOrder from './components/Admin/ProcessOrder';
+import UsersList from './components/Admin/UsersList';
+import UpdateUser from './components/Admin/UpdateUser';
+import ProductReviews from './components/Admin/ProductReviews';
 
 function App() {
   const location = useLocation();
@@ -46,9 +49,9 @@ function App() {
     setStripeApiKey(data.stripeApiKey)
   }
 
-  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new" , '/admin/updateproduct/:id' , "/admin/allorders" , "/admin/updateorder/:id"].includes(location.pathname);
+  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new", '/admin/updateproduct/:id', "/admin/allorders", "/admin/updateorder/:id", "/admin/users", "/admin/getSingleuser/:id"].includes(location.pathname);
 
-  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new" , '/admin/updateproduct/:id' , "/admin/allorders" , "/admin/updateorder/:id"].includes(location.pathname);
+  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new", '/admin/updateproduct/:id', "/admin/allorders", "/admin/updateorder/:id", "/admin/users", "/admin/getSingleuser/:id"].includes(location.pathname);
 
 
   useEffect(() => {
@@ -158,21 +161,39 @@ function App() {
           </ProtectedRoute>
         } />
 
-        <Route isAdmin={true}  path='/admin/updateproduct/:id' element={
+        <Route isAdmin={true} path='/admin/updateproduct/:id' element={
           <ProtectedRoute>
             <UpdateProduct />
           </ProtectedRoute>
         } />
 
-        <Route isAdmin={true}  path='/admin/allorders' element={
+        <Route isAdmin={true} path='/admin/allorders' element={
           <ProtectedRoute>
             <OrderList />
           </ProtectedRoute>
         } />
 
-        <Route isAdmin={true}  path='/admin/updateorder/:id' element={
+        <Route isAdmin={true} path='/admin/updateorder/:id' element={
           <ProtectedRoute>
-          <ProcessOrder/>
+            <ProcessOrder />
+          </ProtectedRoute>
+        } />
+
+        <Route isAdmin={true} path='/admin/users' element={
+          <ProtectedRoute>
+            <UsersList />
+          </ProtectedRoute>
+        } />
+
+        <Route isAdmin={true} path='/admin/getSingleuser/:id' element={
+          <ProtectedRoute>
+            <UpdateUser />
+          </ProtectedRoute>
+        } />
+
+        <Route isAdmin={true} path='/admin/reviews' element={
+          <ProtectedRoute>
+            <ProductReviews/>
           </ProtectedRoute>
         } />
 

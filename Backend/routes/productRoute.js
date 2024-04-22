@@ -21,8 +21,8 @@ router.route("/admin/deleteproduct/:id").delete(isAuthenticateUser , authorizeRo
 
 router.route("/review").put(isAuthenticateUser , controllers.reviewProduct)
 
-router.route("/reviews/getallreviews").get(isAuthenticateUser , controllers.getAllProductReview)
+router.route("/admin/reviews/getallreviews").get(isAuthenticateUser , controllers.getAllProductReview)
 
-router.route("/reviews/delete").delete(isAuthenticateUser , controllers.deleteProdutcReview)
+router.route("/admin/review/delete").delete(isAuthenticateUser , controllers.deleteProdutcReview)
 
 module.exports = router

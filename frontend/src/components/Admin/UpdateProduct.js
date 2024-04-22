@@ -42,6 +42,7 @@ function UpdateProduct() {
         setStock(product.stock)
         setDescription(product.description)
         setOldImages(product.images)
+        setCategory(product.category)
       }
         if (error) {
             alert.error("All feilds are required")

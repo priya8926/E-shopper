@@ -13,15 +13,20 @@ import {
     ADMIN_PRODUCTS_FAILURE,
     NEW_PRODUCT_REQUEST,
     NEW_PRODUCT_SUCCESS,
-    NEW_PRODUCT_RESET,
     NEW_PRODUCT_FAILURE,
     DELETE_PRODUCTS_REQUEST,
     DELETE_PRODUCTS_SUCCESS,
     DELETE_PRODUCTS_FAILURE,
-    CLEAR_ERRORS,
     UPDATE_PRODUCT_REQUEST,
     UPDATE_PRODUCT_SUCCESS,
-    UPDATE_PRODUCT_FAILURE
+    UPDATE_PRODUCT_FAILURE,
+    ALL_REVIEW_REQUEST,
+    ALL_REVIEW_SUCCESS,
+    ALL_REVIEW_FAILURE,
+    DELETE_REVIEW_REQUEST,
+    DELETE_REVIEW_SUCCESS,
+    DELETE_REVIEW_FAILURE,
+    CLEAR_ERRORS,
 } from "../constants/productConstant"
 import axios from "axios"
 
@@ -135,11 +140,11 @@ export const deleteProduct = (id) => async (dispatch) => {
             type: DELETE_PRODUCTS_REQUEST
         })
 
-        const {data} = await axios.delete(`/api/v1/admin/deleteproduct/${id}`)
+        const { data } = await axios.delete(`/api/v1/admin/deleteproduct/${id}`)
 
         dispatch({
             type: DELETE_PRODUCTS_SUCCESS,
-            payload : data.success
+            payload: data.success
         })
     } catch (error) {
         dispatch({
@@ -149,7 +154,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     }
 }
 //update product -- admin
-export const updateProuct = (id , productData) => async (dispatch) => {
+export const updateProuct = (id, productData) => async (dispatch) => {
     try {
         dispatch({
             type: UPDATE_PRODUCT_REQUEST,

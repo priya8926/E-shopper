@@ -8,10 +8,12 @@ import { getAdminOrders } from '../../actions/orderAction'
 import { Link } from 'react-router-dom'
 import { Doughnut , Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
+import { getAllUsers } from '../../actions/userActions'
 
 function Dashboard() {
     const {  products } = useSelector((state) => state.products)
     const { orders } = useSelector((state) => state.allOrders)
+    const {users} = useSelector((state) => state.allUsers)
 
     const dispatch = useDispatch()
     let outOfStock = 0
@@ -49,6 +51,7 @@ function Dashboard() {
     
     dispatch(getAdminProduct())
     dispatch(getAdminOrders())
+    dispatch(getAllUsers())
 
   },[dispatch])
     return (
@@ -73,8 +76,8 @@ function Dashboard() {
                                 <p>{orders.length}</p>
                             </Link>
                             <Link to="/admin/users">
-                                <p>users</p>
-                                <p>502</p>
+                                <p>Users</p>
+                                <p>{users.length}</p>
                             </Link>
                         </div>
 
