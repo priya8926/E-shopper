@@ -18,6 +18,12 @@ function Dashboard() {
     const dispatch = useDispatch()
     let outOfStock = 0
 
+    let totalAmount = 0
+    orders && orders.forEach((item) =>{
+       totalAmount += item.totalPrice
+    })    
+    const formattedTotal = totalAmount.toFixed(2);
+
     products && products.forEach((item)=>{
         if(item.stock === 0){
             outOfStock += 1;
@@ -31,7 +37,7 @@ function Dashboard() {
                 backgroundColor : ["#2209ef"],
                 hoverBackgroundColor : ["#7669e1"],
                 borderWidth: 2,
-                data : [0,4000]
+                data : [0,formattedTotal]
             }
         ]
     }
@@ -46,7 +52,6 @@ function Dashboard() {
         ]
     }
 
-    
   useEffect(()=>{
     
     dispatch(getAdminProduct())
@@ -63,21 +68,21 @@ function Dashboard() {
                     <div className="dashboardSummary">
                         <div>
                             <p>
-                                Total Amount <br /> ₹2000
+                                Total Amount <br /> ₹{formattedTotal}
                             </p>
                         </div>
                         <div className="dashboardSummaryBox2">
                             <Link to="/admin/products">
                                 <p>Products</p>
-                                <p>{products.length}</p>
+                                <p>{products && products.length}</p>
                             </Link>
                             <Link to="/admin/allorders">
                                 <p>Orders</p>
-                                <p>{orders.length}</p>
+                                <p>{orders && orders.length}</p>
                             </Link>
                             <Link to="/admin/users">
                                 <p>Users</p>
-                                <p>{users.length}</p>
+                                <p>{users && users.length}</p>
                             </Link>
                         </div>
 

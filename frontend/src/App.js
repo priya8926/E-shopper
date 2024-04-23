@@ -36,6 +36,7 @@ import UsersList from './components/Admin/UsersList';
 import UpdateUser from './components/Admin/UpdateUser';
 import ProductReviews from './components/Admin/ProductReviews';
 import Contact from './components/Contact';
+import PageNotFound from './components/Layout/PageNotFound';
 
 function App() {
   const location = useLocation();
@@ -74,6 +75,8 @@ function App() {
         <Route exact path="/product/:id" element={<ProductDetails />} />
         
         <Route exact path="/contact" element={<Contact />} />
+
+        <Route path = "*" element = {<PageNotFound/>} />
 
         <Route path="/account" element={
           <ProtectedRoute>

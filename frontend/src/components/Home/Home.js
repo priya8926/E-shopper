@@ -9,6 +9,7 @@ import offer1 from '../../img/offer-1.png'
 import offer2 from '../../img/offer-2.png'
 import Carousel from '../Layout/Carousel'
 import Metadata from '../Layout/Metadata';
+import { Link } from 'react-router-dom';
 
 function Home() {
     return (
@@ -65,10 +66,10 @@ function Home() {
                             className="cat-item d-flex flex-column border mb-4"
                             style={{ padding: 30 }}
                         >
-                            <p className="text-right">15 Products</p>
-                            <a href="" className="cat-img position-relative overflow-hidden mb-3">
+                            {/* <p className="text-right">15 Products</p> */}
+                            <Link to="/Products" className="cat-img position-relative overflow-hidden mb-3">
                                 <img className="img-fluid" src={cat1} alt="" />
-                            </a>
+                           </Link>
                             <h5 className="font-weight-semi-bold m-0">Men's dresses</h5>
                         </div>
                     </div>
@@ -77,10 +78,10 @@ function Home() {
                             className="cat-item d-flex flex-column border mb-4"
                             style={{ padding: 30 }}
                         >
-                            <p className="text-right">15 Products</p>
-                            <a href="" className="cat-img position-relative overflow-hidden mb-3">
+                            {/* <p className="text-right">15 Products</p> */}
+                            <Link to="/Products" className="cat-img position-relative overflow-hidden mb-3">
                                 <img className="img-fluid" src={cat2} alt="" />
-                            </a>
+                           </Link>
                             <h5 className="font-weight-semi-bold m-0">Women's dresses</h5>
                         </div>
                     </div>
@@ -89,10 +90,10 @@ function Home() {
                             className="cat-item d-flex flex-column border mb-4"
                             style={{ padding: 30 }}
                         >
-                            <p className="text-right">15 Products</p>
-                            <a href="" className="cat-img position-relative overflow-hidden mb-3">
+                            {/* <p className="text-right">15 Products</p> */}
+                            <Link to="/Products" className="cat-img position-relative overflow-hidden mb-3">
                                 <img className="img-fluid" src={cat3} alt="" />
-                            </a>
+                           </Link>
                             <h5 className="font-weight-semi-bold m-0">Baby's dresses</h5>
                         </div>
                     </div>
@@ -101,10 +102,10 @@ function Home() {
                             className="cat-item d-flex flex-column border mb-4"
                             style={{ padding: 30 }}
                         >
-                            <p className="text-right">15 Products</p>
-                            <a href="" className="cat-img position-relative overflow-hidden mb-3">
+                            {/* <p className="text-right">15 Products</p> */}
+                            <Link to="/Products" className="cat-img position-relative overflow-hidden mb-3">
                                 <img className="img-fluid" src={cat4} alt="" />
-                            </a>
+                           </Link>
                             <h5 className="font-weight-semi-bold m-0">Accerssories</h5>
                         </div>
                     </div>
@@ -114,9 +115,9 @@ function Home() {
                             style={{ padding: 30 }}
                         >
                             <p className="text-right">15 Products</p>
-                            <a href="" className="cat-img position-relative overflow-hidden mb-3">
+                            <Link to="/Products" className="cat-img position-relative overflow-hidden mb-3">
                                 <img className="img-fluid" src={cat5} alt="" />
-                            </a>
+                           </Link>
                             <h5 className="font-weight-semi-bold m-0">Bags</h5>
                         </div>
                     </div>
@@ -126,9 +127,9 @@ function Home() {
                             style={{ padding: 30 }}
                         >
                             <p className="text-right">15 Products</p>
-                            <a href="" className="cat-img position-relative overflow-hidden mb-3">
+                            <Link to="/Products" className="cat-img position-relative overflow-hidden mb-3">
                                 <img className="img-fluid" src={cat6} alt="" />
-                            </a>
+                           </Link>
                             <h5 className="font-weight-semi-bold m-0">Shoes</h5>
                         </div>
                     </div>
@@ -146,9 +147,9 @@ function Home() {
                                     20% off the all order
                                 </h5>
                                 <h1 className="mb-4 font-weight-semi-bold">Spring Collection</h1>
-                                <a href="" className="btn btn-outline-primary py-md-2 px-md-3">
+                                <Link to="/Products" className="btn btn-outline-primary py-md-2 px-md-3">
                                     Shop Now
-                                </a>
+                               </Link>
                             </div>
                         </div>
                     </div>
@@ -160,9 +161,9 @@ function Home() {
                                     20% off the all order
                                 </h5>
                                 <h1 className="mb-4 font-weight-semi-bold">Winter Collection</h1>
-                                <a href="" className="btn btn-outline-primary py-md-2 px-md-3">
+                                <Link to="/Products" className="btn btn-outline-primary py-md-2 px-md-3">
                                     Shop Now
-                                </a>
+                               </Link>
                             </div>
                         </div>
                     </div>
