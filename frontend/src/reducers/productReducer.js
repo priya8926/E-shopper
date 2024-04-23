@@ -103,7 +103,6 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
 export const newReviewReducer = (state = {}, action) => {
     switch (action.type) {
         case NEW_REVIEW_REQUEST:
-            case ALL_REVIEW_REQUEST:
             return {
                 loading: true,
                 ...state
@@ -211,5 +210,64 @@ export const deleteProductReducer = (state = {}, action) => {
             }
         default:
             return state
+    }
+}
+export const getAllReviews = (state = {reviews : []}, action) => {
+    switch (action.type) {
+        case ALL_REVIEW_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case ALL_REVIEW_SUCCESS:
+            return {
+                loading: false,
+                reviews: action.payload
+            };
+        case ALL_REVIEW_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state;
+    }
+}
+export const deleteReviewReducer = (state = {}, action) => {
+    switch (action.type) {
+        case DELETE_REVIEW_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case DELETE_REVIEW_SUCCESS:
+            return {
+                loading: false,
+                isDeleted: action.payload
+            };
+        case DELETE_REVIEW_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case DELETE_PRODUCTS_RESET:
+            return {
+                ...state,
+                isDeleted : false
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state;
     }
 }

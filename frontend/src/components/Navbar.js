@@ -129,26 +129,7 @@ function Navbar() {
                                     <Link to="/Products" className="nav-item nav-link">
                                         Products
                                     </Link>
-                                    <Link to="/shopdetail" className="nav-item nav-link">
-                                        Shop Detail
-                                    </Link>
-                                    <div className="nav-item dropdown">
-                                        <Link
-                                            to="/pages"
-                                            className="nav-link dropdown-toggle"
-                                            data-toggle="dropdown"
-                                        >
-                                            Pages
-                                        </Link>
-                                        <div className="dropdown-menu rounded-0 m-0">
-                                            <Link to="/shoppingcart" className="dropdown-item">
-                                                Shopping Cart
-                                            </Link>
-                                            <Link to="/checkout" className="dropdown-item">
-                                                Checkout
-                                            </Link>
-                                        </div>
-                                    </div>
+                                    
                                     <Link to="/contact" className="nav-item nav-link">
                                         Contact
                                     </Link>

@@ -163,7 +163,12 @@ exports.reviewProduct = catchAsyncError(async (req, res, next) => {
     product.reviews.forEach(rev => {
         avg += rev.rating
     })
-    product.ratings = avg / product.reviews.length
+    let ratings = 0
+    if (product.reviews.length === 0) {
+        product.ratings = 0; // Set ratings to 0 if there are no reviews
+    }else{
+        product.ratings = avg / product.reviews.length
+    }
 
     await product.save({ validateBeforeSave: false })
     res.status(200).json({

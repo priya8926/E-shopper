@@ -55,7 +55,7 @@ function Sidebar() {
                     <PeopleIcon /> Users
                 </p>
             </Link>
-            <Link to="/admin/reviews">
+            <Link to='/admin/reviews/getallreviews'>
                 <p>
                     <RateReviewIcon /> Reviews
                 </p>

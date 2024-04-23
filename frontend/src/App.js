@@ -35,6 +35,7 @@ import ProcessOrder from './components/Admin/ProcessOrder';
 import UsersList from './components/Admin/UsersList';
 import UpdateUser from './components/Admin/UpdateUser';
 import ProductReviews from './components/Admin/ProductReviews';
+import Contact from './components/Contact';
 
 function App() {
   const location = useLocation();
@@ -49,9 +50,9 @@ function App() {
     setStripeApiKey(data.stripeApiKey)
   }
 
-  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new", '/admin/updateproduct/:id', "/admin/allorders", "/admin/updateorder/:id", "/admin/users", "/admin/getSingleuser/:id"].includes(location.pathname);
+  const isNavbarVisible = !['/shipping', '/order/confirm', '/payment', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new", '/admin/updateproduct/:id', "/admin/allorders", "/admin/updateorder/:id", "/admin/users", "/admin/getSingleuser/:id" , '/admin/reviews/getallreviews'].includes(location.pathname);
 
-  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new", '/admin/updateproduct/:id', "/admin/allorders", "/admin/updateorder/:id", "/admin/users", "/admin/getSingleuser/:id"].includes(location.pathname);
+  const isFooterVisible = !["/login", "/me/update", "/password/update", "/password/forgot", "/shipping", '/order/confirm', "/process/payment", "/order/success", "/admin/dashboard", '/admin/products', "/admin/products/new", '/admin/updateproduct/:id', "/admin/allorders", "/admin/updateorder/:id", "/admin/users", "/admin/getSingleuser/:id" , '/admin/reviews/getallreviews'].includes(location.pathname);
 
 
   useEffect(() => {
@@ -71,6 +72,8 @@ function App() {
         <Route exact path="/Products/:keyword" element={<Shop />} />
 
         <Route exact path="/product/:id" element={<ProductDetails />} />
+        
+        <Route exact path="/contact" element={<Contact />} />
 
         <Route path="/account" element={
           <ProtectedRoute>
@@ -191,7 +194,7 @@ function App() {
           </ProtectedRoute>
         } />
 
-        <Route isAdmin={true} path='/admin/reviews' element={
+        <Route isAdmin={true} path='/admin/reviews/getallreviews' element={
           <ProtectedRoute>
             <ProductReviews/>
           </ProtectedRoute>
